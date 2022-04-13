@@ -15,7 +15,7 @@ import AdminService from '../../service/AdminService';
 
 
 
-const UserDashboardComponent = () => {
+const AdminDashboardComponent = () => {
 	const userObject1 = window.sessionStorage.getItem("sessionObjectId");
 	const userObject2 = window.sessionStorage.getItem("sessionObjectFirstName");
 	const userObject3 = window.sessionStorage.getItem("sessionObjectEmail");
@@ -43,11 +43,10 @@ const UserDashboardComponent = () => {
 	const [allUsers, setAllUsers] = useState([]);
 	const [allBooks, setAllBooks] = useState([]);
 
+	const [loggedInAsAdmin,setLoggedInAsAdmin] = useState(false);
 	const [loginFalse, setLoginFalse] = useState(false);
 	const [updatePassword, setUpdatePassword] = useState(false);
 	const [logout, setLogout] = useState(false);
-	// const [addAddress, setAddAddress] = useState(false);
-	// const [addCard, setAddCard] = useState(false);
 	const [addBook, setAddBook] = useState(false);
 	const { state, dispatch } = useContext(UserContext);
 
@@ -57,13 +56,18 @@ const UserDashboardComponent = () => {
 		}
 	});
 
-	// useEffect(()=>{
-
-	// })
+	useEffect(() => {
+		if(userObject4 === "ADMIN"){
+			setLoggedInAsAdmin(true);
+			navigate("/admindashboard");
+		}else {
+			navigate("/");
+		}
+	},[]);
 
 
 	useEffect(() => {
-		// window.scrollTo(0, 0);
+		//  window.scrollTo(0, 0);
 
 		if (snackBar === "show") {
 			console.log(snackBar);
@@ -105,21 +109,6 @@ const UserDashboardComponent = () => {
 		setLogout(true);
 		dispatch({ type: "USER", payload: false });
 	};
-
-	const updatePasswordClick = (event) => {
-		event.preventDefault();
-		setUpdatePassword(true);
-	};
-
-	// const addAnAddressClick = (event) => {
-	// 	event.preventDefault();
-	// 	setAddAddress(true);
-	// }
-
-	// const addACardClick = (event) => {
-	// 	event.preventDefault();
-	// 	setAddCard(true);
-	// }
 
 	const mouseOverAnimation1 = () => {
 		setAnimationZoomIn1("fade-up");
@@ -171,6 +160,11 @@ const UserDashboardComponent = () => {
 		}, 700)
 	}
 
+	const updatePasswordClick = (event) => {
+		event.preventDefault();
+		setUpdatePassword(true);
+	};
+
 	const addABookClick = (event) => {
 		event.preventDefault();
 		setAddBook(true);
@@ -201,15 +195,9 @@ const UserDashboardComponent = () => {
 			{loginFalse && <Navigate to="/login" />}
 			{logout && <Navigate to="/login" />}
 			{updatePassword && <Navigate to="/changepassword" />}
-			{/* {addAddress && <Navigate to="/addanaddress" />} */}
-			{/* {addCard && <Navigate to="/addacard" />} */}
 			{addBook && <Navigate to="/addNewBook" />}
-			{/* {viewProfile && <Navigate to="/"/>} */}
 			<br />
 			<br />
-
-
-
 
 			<div className="card mx-auto shadow" style={{ width: "75%" }}>
 
@@ -223,9 +211,7 @@ const UserDashboardComponent = () => {
 					<h1 className="display-5 p-4 text-center text-muted">Welcome back, {userObject2}</h1>
 				</div>
 
-
 				<div className="row g-1 container" style={{ "margin-left": '16.5rem' }}>
-
 						<div style={{ "margin-left": '10rem' }} className="m-2 col-3">
 							<Card border="info" style={{ width: '18rem'}}>
 								<Card.Body>
@@ -412,7 +398,7 @@ const UserDashboardComponent = () => {
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<div className="card" style={{ width: "22rem" }}>
-							<img src={messi} className="card-img-top" alt="..." />
+							<img src={logo} className="card-img-top" alt="..." />
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
 									<h5><strong>NAME : </strong>{userObject2}&nbsp;{userObject5}</h5>
@@ -435,9 +421,4 @@ const UserDashboardComponent = () => {
 	);
 }
 
-
-
-
-
-
-export default UserDashboardComponent
+export default AdminDashboardComponent;

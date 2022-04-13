@@ -113,7 +113,7 @@ const AddCardComponent = () => {
 				.then((respose) => {
 					window.alert("Card Added successfully!");
 					console.log("card added successfully!!!", respose.data);
-					navigate("/");
+					navigate("/customerdashboard");
 				})
 				.catch((err) => {
 					console.error("failed to add card!!!", err);

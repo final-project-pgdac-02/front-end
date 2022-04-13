@@ -21,4 +21,8 @@ const addACard = (userId, cardObject) => {
 	return axios.post(USER_SERVICE_API_URL + "/addacard/" + userId, cardObject);
 };
 
-export default { processLoginForm, processRegisterForm, updatePassword, addAnAddress, addACard };
+const getAllOrdersById = (id) => {
+    return axios.get(USER_SERVICE_API_URL + "/" + id);
+}
+
+export default { processLoginForm, processRegisterForm, updatePassword, addAnAddress, addACard , getAllOrdersById };

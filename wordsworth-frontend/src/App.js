@@ -9,7 +9,7 @@ import Login from './Components/user/Login'
 import NotFound from './Components/errors/Notfound'
 import Register from "./Components/user/Register";
 import UpdatePasswordComponent from "./Components/user/UpdatePasswordComponent";
-import UserDashboardComponent from './Components/user/UserDashboardComponent';
+import UserDashboardComponent from './Components/admin/AdminDashboardComponent';
 import AddAddressComponent from './Components/user/AddAddressComponent';
 import AddCardComponent from './Components/user/AddCardComponent';
 import AddFeedbackComponent from './Components/user/AddFeedbackComponent';
@@ -32,9 +32,10 @@ import "aos/dist/aos.css";
 import Search from './Components/Search';
 import AdvancedSearchResultComponent from './Components/AdvancedSearchResultComponent';
 import OrderHistoryComponent from './Components/user/OrderHistoryComponent';
+import CustomerDashboardComponent from './Components/user/CustomerDashboardComponent';
+import AdminDashboardComponent from './Components/admin/AdminDashboardComponent';
 
 export const UserContext = createContext();
-
 
 function App() {
 
@@ -67,7 +68,8 @@ function App() {
 
 					<Route path="/books/:id" element={<Book />} />
 					<Route path="/login" exact element={<Login />} />
-					<Route path="/userdashboard" exact element={<UserDashboardComponent />} />
+					<Route path="/admindashboard" exact element={<AdminDashboardComponent />} />
+					<Route path="/customerdashboard" exact element={<CustomerDashboardComponent />} />
 					<Route path="/registration" exact element={<Register />} />
 					<Route path="/changepassword" exact element={<UpdatePasswordComponent />} />
 					<Route path="/addanaddress" exact element={<AddAddressComponent />} />

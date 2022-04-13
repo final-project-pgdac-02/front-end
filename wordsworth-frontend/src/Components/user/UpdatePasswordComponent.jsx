@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import UserService from "../../service/UserService";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../../App";
 
 
 const UpdatePasswordComponent = () => {
 	let navigate = useNavigate();
+	const { state, dispatch } = useContext(UserContext);
 	const [notLoggedIn, setNotLoggedIn] = useState(false);
 
 	const [userId, setUserId] = useState("");
@@ -28,13 +30,11 @@ const UpdatePasswordComponent = () => {
 			alert("You need to login to Change Password!");
 			setNotLoggedIn(true);
 		} else {
+			setUserId(id);
+			setFirstName(name);
 		}
 	}, []);
 
-	useEffect(() => {
-		setUserId(id);
-		setFirstName(name);
-	}, []);
 
 	let oldPasswordTextHandler = (event) => {
 		setOldPassword(event.target.value);
@@ -85,21 +85,31 @@ const UpdatePasswordComponent = () => {
 			return true;
 		}
 	};
+	const LogoutClick = () => {
+		window.sessionStorage.removeItem("sessionObjectId");
+		window.sessionStorage.removeItem("sessionObjectFirstName");
+		window.sessionStorage.removeItem("sessionObjectEmail");
+		window.sessionStorage.removeItem("sessionObjectRole");
+		dispatch({ type: "USER", payload: "" });
+		window.sessionStorage.setItem("snackbar1", "show");
+		navigate("/login");
+	};
 
 	const OnChangePasswordClick = (event) => {
 		event.preventDefault();
+		console.log(userId);
 
 		if (validation()) {
 			setOldPasswordErr("");
 			setNewPasswordErr("");
 			setConfirmNewPasswordErr("");
 
-			let passwordObject = { userId, oldPassword, newPassword };
+			let passwordObject = { "id":userId, oldPassword, newPassword };
 			UserService.updatePassword(passwordObject)
 				.then((respose) => {
 					window.alert("Password updated successfully!");
 					console.log("Password Updated Succefully", respose.data);
-					navigate("/userdashboard")
+					LogoutClick();
 				})
 				.catch((err) => {
 					console.log("Cannot Update the Password", err);
@@ -111,18 +121,6 @@ const UpdatePasswordComponent = () => {
 		<>
 			{notLoggedIn && <Navigate to="/login" />}
 			<div>
-				{/* {showAlert && (
-					<ToastContainer className="p-3" position="top-center">
-						<Toast>
-							<Toast.Header closeButton={false}>
-								<strong className="me-auto">Notification</strong>
-								<small>Just Now</small>
-							</Toast.Header>
-							<Toast.Body>Password updated successfully!</Toast.Body>
-						</Toast>
-					</ToastContainer>
-				)} */}
-
 				<br />
 				<br />
 				<div className="card mx-auto shadow" style={{ width: "45%" }}>

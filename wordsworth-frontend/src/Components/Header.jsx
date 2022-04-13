@@ -19,7 +19,7 @@ const Header = () => {
 	const userId = window.sessionStorage.getItem("sessionObjectId");
 	const userObject2 = window.sessionStorage.getItem("sessionObjectFirstName");
 	const { state, dispatch } = useContext(UserContext);
-	const [searchString, setSearchString]=useState("");
+	const [searchString, setSearchString] = useState("");
 
 
 	const onCartClickhandler = () => {
@@ -29,17 +29,17 @@ const Header = () => {
 		} else navigate("/usercart");
 	};
 
-	const onFormChangeHandler=(event)=>{
+	const onFormChangeHandler = (event) => {
 		// event.preventDefault()
 		setSearchString(event.target.value)
 		console.log(searchString);
-		console.log("in on form change handler: "+searchString);
+		console.log("in on form change handler: " + searchString);
 	}
 
-	const onSearchClickHandler=(e)=>{
+	const onSearchClickHandler = (e) => {
 		e.preventDefault();
-		console.log("in on searchClickHandler: "+searchString)
-		if(searchString){
+		console.log("in on searchClickHandler: " + searchString)
+		if (searchString) {
 			// setSearch(true);
 			navigate(`/search/${searchString}`);
 		}
@@ -66,6 +66,7 @@ const Header = () => {
 		navigate("/login");
 	};
 
+
 	let navbarList1 = [
 		{ "to": "/login", "name": "Login" }, { "to": "/registration", "name": "Register" }
 	];
@@ -79,15 +80,36 @@ const Header = () => {
 	];
 
 	let navbarList3 = [
-		{ "to": "/userdashboard", "name": "Dashboard" }
+		{ "to": "/admindashboard", "name": "Dashboard" }
 	];
 
+
+	const RenderDashboard = () => {
+		if (state === "user") {
+			return (
+				<NavLink to="/customerdashboard" className="mx-3 text-decoration-none text-muted">
+					{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
+					<FontAwesomeIcon icon={faUser} className="mx-auto fs-4" />
+					{/* </Button> */}
+				</NavLink>
+			);
+		} else if (state === "admin") {
+			return (
+			<NavLink to="/admindashboard" className="mx-3 text-decoration-none text-muted">
+				{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
+				<FontAwesomeIcon icon={faUser} className="mx-auto fs-4" />
+				{/* </Button> */}
+			</NavLink>
+			);
+		}
+	}
 
 	const RenderMenu = () => {
 		if (state === "user") {
 			console.log("Hi from USER");
 			return (
 				<>
+					
 					<Nav>
 						<NavDropdown title={userObject2} id="basic-nav-dropdown">
 							{navbarList2.map((ele, key) => {
@@ -130,11 +152,7 @@ const Header = () => {
 			console.log("Hi from LOG OUT");
 			return (
 				<>
-					<NavLink to="/userdashboard" className="mx-3 text-decoration-none text-muted">
-						{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
-						<FontAwesomeIcon icon={faUser} className="mx-auto fs-4" />
-						{/* </Button> */}
-					</NavLink>
+
 					<Nav>
 
 
@@ -187,14 +205,15 @@ const Header = () => {
 
 
 
-						<NavLink to="/userdashboard" className="mx-3 text-decoration-none text-muted">
+						{/* <NavLink to="/userdashboard" className="mx-3 text-decoration-none text-muted">
 							{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
-							<FontAwesomeIcon icon={faUser} className="mx-auto fs-4" />
-							{/* </Button> */}
-						</NavLink>
+						{/* <FontAwesomeIcon icon={faUser} className="mx-auto fs-4" /> */}
+						{/* </Button> */}
+						{/* </NavLink> */}
+						<RenderDashboard/>
 
 						<NavLink to="#" className="mx-3 text-decoration-none text-muted">
-                            <AdvancedSearchComponent/>
+							<AdvancedSearchComponent />
 							{/* <FontAwesomeIcon icon={faUser} className="mx-auto fs-4" /> */}
 							{/* </Button> */}
 						</NavLink>
@@ -235,6 +254,10 @@ const Header = () => {
 							Register
 						</NavLink>
 					</Nav> */}
+
+
+
+					<RenderMenu />
 					<Nav>
 						<Nav.Link eventKey={2} className="fs-4 text-muted">
 							{/* <FontAwesomeIcon icon={faCartShopping} className="mx-auto" onClick={onCartClickhandler} /> */}
@@ -247,8 +270,6 @@ const Header = () => {
 							{/* </Button> */}
 						</Nav.Link>
 					</Nav>
-
-					<RenderMenu />
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
