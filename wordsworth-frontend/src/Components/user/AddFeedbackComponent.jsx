@@ -1,39 +1,45 @@
 import React from 'react'
 import { useContext, useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import BookService from "../../service/BookService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faCommentMedical } from "@fortawesome/free-solid-svg-icons";
 
 
 
-const AddFeedbackComponent = () => {
+const AddFeedbackComponent = (props) => {
+	let bookId = useParams(props.id);
 
-	const [addFeedbackDone, setAddFeedbackDone] = useState(false);
+	let navigate = useNavigate();
+
+	const [title, setTitle] = useState("");
 	const [reviewerName, setReviewerName] = useState("");
 	const [review, setReview] = useState("");
 	const [rating, setRating] = useState(0);
 	const [hover, setHover] = useState(0);
-	const [idErr, setIdErr] = useState("");
+
 	const [reviewerNameErr, setReviewerNameErr] = useState("");
 	const [reviewErr, setReviewErr] = useState("");
 	const [ratingErr, setRatingErr] = useState("");
 	const [notLoggedIn, setNotLoggedIn] = useState(false);
-	let { id } = useParams();
+
 	const getUserId = window.sessionStorage.getItem("sessionObjectId");
 	useEffect(() => {
 		if (getUserId === null) {
 			alert("You need to login to add feedback!");
 			setNotLoggedIn(true);
-		} else {
 		}
 	}, []);
 
-	useEffect((id)=>{
-		BookService.getAllBook(id).then(response => {
-			
-		})
-	},[])
+	useEffect(() => {
+		BookService.getBookDetails(bookId.id).then(response => {
+			console.log(bookId.id);
+			console.log(response.data.bookTitle);
+			setTitle(response.data.bookTitle);
+		}).catch(err => {
+			window.alert("Something Went wrong", err);
+		});
+	}, []);
 
 
 	let ReviewNameHandler = (event) => {
@@ -41,7 +47,7 @@ const AddFeedbackComponent = () => {
 		if (reviewerNameErr !== null || reviewerNameErr !== "") {
 			setReviewerNameErr("");
 		}
-		console.log(reviewerName);
+		// console.log(reviewerName);
 	}
 
 	let ReviewHandler = (event) => {
@@ -49,14 +55,14 @@ const AddFeedbackComponent = () => {
 		if (reviewErr !== null || reviewErr !== "") {
 			setReviewErr("");
 		}
-		console.log(review)
+		// console.log(review);
 	}
 
 	let ratingTextHandler = (event) => {
 		if (ratingErr !== null || ratingErr !== 0) {
 			setRatingErr("");
 		}
-		console.log("Handler " + rating);
+		// console.log("Handler " + rating);
 	}
 
 	let validation = () => {
@@ -86,28 +92,25 @@ const AddFeedbackComponent = () => {
 	let OnAddFeedbackClick = (e) => {
 		e.preventDefault();
 		if (validation()) {
-			setIdErr("");
 			setReviewerNameErr("");
 			setRatingErr("");
 			setRatingErr("");
 
 			let feedBackObject = { reviewerName, review, rating };
-			BookService.processFeedBack(id, feedBackObject).then(resp => {
+			BookService.processFeedBack(bookId.id, feedBackObject).then(resp => {
 				window.alert("Feedback Added Successfully!", resp.data);
 				console.log("Feedback Added Successfully!", resp.data);
-				setAddFeedbackDone(true);
+				navigate("/books/" + bookId.id);
 			}).catch((err) => {
 				console.error("Something went wrong", err);
 			});
 		}
 	}
 
-
-
 	return (
 		<>
 			{notLoggedIn && <Navigate to="/login" />}
-			{addFeedbackDone && <Navigate to={"/books/" + id} />}
+			{/* {addFeedbackDone && <Navigate to={"/books/" + bookId.id} />} */}
 			<div>
 				<br />
 				<br />
@@ -119,19 +122,19 @@ const AddFeedbackComponent = () => {
 						</div>
 						<form onSubmit={OnAddFeedbackClick}>
 							<div className=" col-6 mx-auto m-3 ">
-								<label htmlFor="id" className="form-label ">
-									Book ID
+								<label htmlFor="title" className="form-label ">
+									Book Title
 								</label>
 								<input
-									type="number"
+									type="text"
 									className="form-control"
-									id="id"
+									id="title"
 									aria-describedby="id"
-									value={id}
+									value={title}
 									disabled
 								/>
-								<span className="text-danger">{idErr}</span>
 							</div>
+
 							<div className="m-3 col-6 mx-auto  ">
 								<label htmlFor="name" className="form-label ">
 									Your Name
@@ -207,4 +210,4 @@ const AddFeedbackComponent = () => {
 	);
 }
 
-export default AddFeedbackComponent
+export default AddFeedbackComponent;
