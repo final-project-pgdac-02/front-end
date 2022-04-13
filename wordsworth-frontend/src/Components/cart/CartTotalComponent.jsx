@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const CartTotalComponent = (props) => {
 
@@ -10,8 +11,9 @@ const CartTotalComponent = (props) => {
     //    getCartTotal();
     // }, []);
 
-		const [cartInfo,setCartInfo]=useState(0);
+		// const [cartInfo,setCartInfo]=useState(0);
 
+		const navigate = useNavigate();
 
 		const discount=props.discount;
 
@@ -22,6 +24,17 @@ const CartTotalComponent = (props) => {
 	// 	setCartInfo(res.data);
 	// }
 
+		const roundedTotalPrice=Math.ceil(props.totalPrice*100)/100;
+		const roundedDiscountedTotal=Math.ceil(discountedTotal*100)/100;
+
+		const onBuyHandler=()=>{
+			if(props.itemCount===0){
+				alert("Please add atleast 1 item to the cart!!");
+			}
+			else{
+				navigate("/order");
+			}
+		}
 
 	return (
 		<div>
@@ -41,7 +54,6 @@ const CartTotalComponent = (props) => {
 						<div className="col-5 text-center">
 							{/* <h6 className="card-title lead fs-4">{cartInfo.totalItems}</h6> */}
 							<h6 className="card-title lead fs-4">{props.itemCount}</h6>
-							
 						</div>
 					</div>
 					<div className="card-body row mx-auto">
@@ -52,7 +64,8 @@ const CartTotalComponent = (props) => {
 							<h6 className="card-title lead fs-4">:</h6>
 						</div>
 						<div className="col-5 text-center">
-						<h6 className="card-title lead fs-4">₹ {props.totalPrice.toFixed(2)}</h6>
+							{/* <h6 className="card-title lead fs-4">₹ {props.totalPrice.toFixed(2)}</h6> */}
+							<h6 className="card-title lead fs-4">₹ {roundedTotalPrice}</h6>
 							{/* <h6 className="card-title lead fs-4">₹ {cartInfo.cartSubTotal}</h6> */}
 						</div>
 					</div>
@@ -65,7 +78,8 @@ const CartTotalComponent = (props) => {
 						</div>
 						<div className="col-5 text-center">
 							{/* <h6 className="card-title lead fs-4">₹ {cartInfo.discountedTotal}</h6> */}
-							<h6 className="card-title lead fs-4">₹ {discountedTotal.toFixed(2)}</h6>
+							{/* <h6 className="card-title lead fs-4">₹ {discountedTotal.toFixed(2)}</h6> */}
+							<h6 className="card-title lead fs-4">₹ {roundedDiscountedTotal}</h6>
 						</div>
 					</div>
 
@@ -76,14 +90,16 @@ const CartTotalComponent = (props) => {
 					</div>
 					<div className="card-body row mx-auto">
 						<div className="col text-center">
-							<button className="btn btn-warning fw-light btn-lg fs-3 text-center">
-								Proceed To Buy &nbsp;<FontAwesomeIcon icon={faShoppingBasket} />
-							</button>
+							{/* <NavLink > */}
+								<button className="btn btn-danger fw-light btn-lg fs-3 text-center" onClick={onBuyHandler}>
+									Proceed To Buy &nbsp;
+									<FontAwesomeIcon icon={faShoppingBasket} />
+								</button>
+							{/* </NavLink> */}
 						</div>
 					</div>
 					<div className="card-body row mx-auto">
-						<div className="col">
-						</div>
+						<div className="col"></div>
 					</div>
 				</div>
 			</div>

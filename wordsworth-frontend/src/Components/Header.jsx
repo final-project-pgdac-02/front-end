@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown, Form, Button, FormControl } from "react-bootstrap";
 import WordsworthSvgComponent from "./WordsworthSvgComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faCartShopping, faUser, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from '../App';
+import AdvancedSearchComponent from "./AdvancedSearchComponent";
 
 
 const Header = () => {
@@ -18,6 +19,7 @@ const Header = () => {
 	const userId = window.sessionStorage.getItem("sessionObjectId");
 	const userObject2 = window.sessionStorage.getItem("sessionObjectFirstName");
 	const { state, dispatch } = useContext(UserContext);
+	const [searchString, setSearchString]=useState("");
 
 
 	const onCartClickhandler = () => {
@@ -26,6 +28,22 @@ const Header = () => {
 			navigate("/login");
 		} else navigate("/usercart");
 	};
+
+	const onFormChangeHandler=(event)=>{
+		// event.preventDefault()
+		setSearchString(event.target.value)
+		console.log(searchString);
+		console.log("in on form change handler: "+searchString);
+	}
+
+	const onSearchClickHandler=(e)=>{
+		e.preventDefault();
+		console.log("in on searchClickHandler: "+searchString)
+		if(searchString){
+			// setSearch(true);
+			navigate(`/search/${searchString}`);
+		}
+	}
 
 
 	const LogoutClick = () => {
@@ -57,7 +75,7 @@ const Header = () => {
 		{ "to": "/addacard", "name": "Add A Card" },
 		{ "to": "/changepassword", "name": "Change Password" },
 		{ "to": "#action/3.3", "name": "Upgrade Membership" },
-		{ "to": "#action/3.4", "name": "View Past Orders" }
+		{ "to": "/orderhistory", "name": "View Past Orders" }
 	];
 
 	let navbarList3 = [
@@ -167,6 +185,20 @@ const Header = () => {
 							Dashboard
 						</NavLink> */}
 
+
+
+						<NavLink to="/userdashboard" className="mx-3 text-decoration-none text-muted">
+							{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
+							<FontAwesomeIcon icon={faUser} className="mx-auto fs-4" />
+							{/* </Button> */}
+						</NavLink>
+
+						<NavLink to="#" className="mx-3 text-decoration-none text-muted">
+                            <AdvancedSearchComponent/>
+							{/* <FontAwesomeIcon icon={faUser} className="mx-auto fs-4" /> */}
+							{/* </Button> */}
+						</NavLink>
+
 						{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
 							<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
 							<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -177,15 +209,18 @@ const Header = () => {
 						{/* <Nav.Link align="left" href="#link">Link</Nav.Link> */}
 					</Nav>
 					<div className="mx-auto">
-						<Form className="d-flex">
+						{/* <Form className="d-flex" onSubmit={()=>navigate(`/search/${searchString}`)}> */}
+						<Form className="d-flex" onSubmit={onSearchClickHandler}>
 							<FormControl
 								type="search"
 								placeholder="Search for your next favourite book here!"
 								className="me-2 text-center rounded-pill"
 								aria-label="Search"
+								value={searchString}
+								onChange={onFormChangeHandler}
 								style={{ width: "30em" }}
 							/>
-							<Button variant="light fs-4 text-muted rounded-circle">
+							<Button variant="light fs-4 text-muted rounded-circle" onClick={onSearchClickHandler}>
 								<FontAwesomeIcon icon={faMagnifyingGlass} className="mx-auto" />
 							</Button>
 						</Form>

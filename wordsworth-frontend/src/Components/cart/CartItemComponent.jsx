@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp, faAngleDown, faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
@@ -8,6 +8,7 @@ const CartItemComponent = (props) => {
 	
 
     const [quantity, setQuantity] = useState(props.item.quantity);
+
 
     const increment = async () => {
         setQuantity(quantity+1)

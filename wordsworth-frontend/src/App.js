@@ -13,7 +13,7 @@ import UserDashboardComponent from './Components/user/UserDashboardComponent';
 import AddAddressComponent from './Components/user/AddAddressComponent';
 import AddCardComponent from './Components/user/AddCardComponent';
 import AddFeedbackComponent from './Components/user/AddFeedbackComponent';
-import UserCartComponent from "./Components/orders/UserCartComponent";
+import UserCartComponent from "./Components/cart/UserCartComponent";
 import AddBookComponent from './Components/admin/AddBookComponent';
 import OrderFormComponent from './Components/orders/OrderFormComponent';
 import { createContext, useEffect, useReducer } from 'react';
@@ -29,6 +29,9 @@ import DiscountPercentComponent from './Components/admin/DiscountPercentComponen
 import MembershipCostComponent from './Components/admin/MembershipCostComponent';
 import AOS from 'aos';
 import "aos/dist/aos.css";
+import Search from './Components/Search';
+import AdvancedSearchResultComponent from './Components/AdvancedSearchResultComponent';
+import OrderHistoryComponent from './Components/user/OrderHistoryComponent';
 
 export const UserContext = createContext();
 
@@ -81,6 +84,10 @@ function App() {
 					<Route path="/membership/status/:id" exact element={<DiscountStatusComponent />} />
 					<Route path="/membership/discount/:id" exact element={<DiscountPercentComponent />} />
 					<Route path="/membership/cost/:id" exact element={<MembershipCostComponent />} />
+					<Route path="/search/:title" exact element={<Search />} />
+					<Route path="/order" element={<OrderFormComponent />} />
+					<Route path="/advancedsearchresult" element={<AdvancedSearchResultComponent />} />
+					<Route path="/orderhistory" element={<OrderHistoryComponent />} />
 					<Route path="*" exact element={<NotFound />} />
 					
 				</Routes>
