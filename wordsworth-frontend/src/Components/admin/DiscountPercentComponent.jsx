@@ -19,7 +19,6 @@ const DiscountPercentComponent = () => {
 	const [percent, setPercent] = useState(0);
     const [percentEdited, setPercentEdited] = useState(false);
 
-
 	let { id } = useParams();
 
 	const saveDiscountPercentHandler = (e) => {

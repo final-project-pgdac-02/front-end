@@ -94,7 +94,7 @@ function UpdateProfile() {
             AdminService.updateProfile(id, userObject).then(response => {
                 console.log("Profile Updated Successfully!!", response.data);
                 window.alert("Profile Updated Successfully!!", response.data);
-                navigate("/userdashboard");
+                navigate("/admindashboard");
             }).catch(error => {
                 window.alert("Something went wrong", error);
             });

@@ -76,23 +76,10 @@ const ViewAllUsers = () => {
 
     }
 
-    // const RenderAlert = () => {
-    //     if (userAdminOrNot) {
-    //         return(
-    //         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    //             <strong>Sorry !!!</strong> ADMIN Users Cannot Be Deleted.
-    //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    //         </div>
-    //         )
-    //     }
-    // }
-
     return (
         <>
             {loggedInAdminOrNot && <Navigate to="/login"/>}
             <div className="card" style={{ "margin": 70 }}>
-
-                {/* <RenderAlert/> */}
 
                 <table className="table align-middle mb-0 bg-white table-striped">
                     <thead className="thead-dark">

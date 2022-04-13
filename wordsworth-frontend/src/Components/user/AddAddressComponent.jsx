@@ -14,7 +14,6 @@ const AddAddressComponent = () => {
 	const [pinCode, setPinCode] = useState("");
 	const [state, setState] = useState("");
 
-	const [userIdErr, setUserIdErr] = useState("");
 	const [addressNameErr, setAddressNameErr] = useState("");
 	const [cityErr, setCityErr] = useState("");
 	const [countryErr, setCountryErr] = useState("");
@@ -29,21 +28,12 @@ const AddAddressComponent = () => {
 		setUserId(id);
 	}, [id]);
 
-
-    let userIdTextHandler = (event) => {
-		setUserId(event.target.value);
-		if (userIdErr !== null || userIdErr !== "") {
-			setUserIdErr("");
-		}
-		console.log(userId);
-	};
-
 	let addressNameTextHandler = (event) => {
 		setAddressName(event.target.value);
 		if (addressNameErr !== null || addressNameErr !== "") {
 			setAddressNameErr("");
 		}
-		console.log(addressName);
+		// console.log(addressName);
 	};
 
 	let cityTextHandler = (event) => {
@@ -51,7 +41,7 @@ const AddAddressComponent = () => {
 		if (cityErr !== null || cityErr !== "") {
 			setCityErr("");
 		}
-		console.log(city);
+		// console.log(city);
 	};
 
 	let countryTextHandler = (event) => {
@@ -59,7 +49,7 @@ const AddAddressComponent = () => {
 		if (countryErr !== null || countryErr !== "") {
 			setCountryErr("");
 		}
-		console.log(country);
+		// console.log(country);
 	};
 
 	let detailedAddressTextHandler = (event) => {
@@ -67,7 +57,7 @@ const AddAddressComponent = () => {
 		if (detailedAddressErr !== null || detailedAddressErr !== "") {
 			setDetailedAddressErr("");
 		}
-		console.log(detailedAddress);
+		// console.log(detailedAddress);
 	};
 
 	let pinCodeTextHandler = (event) => {
@@ -75,24 +65,19 @@ const AddAddressComponent = () => {
 		if (pinCodeErr !== null || pinCodeErr !== "") {
 			setPinCodeErr("");
 		}
-		console.log(pinCode);
+		// console.log(pinCode);
 	};
 
 	let stateTextHandler = (event) => {
 		setState(event.target.value);
-		if (state !== null || state !== "") {
+		if (stateErr !== null || stateErr !== "") {
 			setStateErr("");
 		}
-		console.log(state);
+		// console.log(state);
 	};
 
 	let validation = () => {
 		let flag = true;
-
-		if (userId === null || userId === "") {
-			setUserIdErr("This Field is Mandatory");
-			flag = false;
-		}
 
 		if (addressName === null || addressName === "") {
 			setAddressNameErr("This Field is Mandatory");
@@ -133,7 +118,6 @@ const AddAddressComponent = () => {
 		event.preventDefault();
 
 		if (validation()) {
-			setUserIdErr("");
 			setAddressNameErr("");
 			setCityErr("");
 			setCountryErr("");
@@ -156,7 +140,7 @@ const AddAddressComponent = () => {
 
 	return (
 		<>
-			{addAnAddressDone && <Navigate to="/" />}
+			{addAnAddressDone && <Navigate to="/customerdashboard" />}
 			<div>
 				<br />
 				<br />
@@ -177,11 +161,11 @@ const AddAddressComponent = () => {
 										className="form-control"
 										id="id"
 										aria-describedby="id"
-										onChange={userIdTextHandler}
+										// onChange={userIdTextHandler}
 										value={userId}
 										disabled
 									/>
-									<span className="text-danger">{userIdErr}</span>
+									{/* <span className="text-danger">{userIdErr}</span> */}
 								</div>
 								<div className="my-3 col-10 mx-auto  ">
 									<label for="addrName" className="form-label ">

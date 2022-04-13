@@ -23,7 +23,7 @@ const AddressListComponent = (props) => {
   }
 
   const onAddAddressHandler = () => {
-    navigate("/addacard")
+    navigate("/addanaddress");
   }
 
   const getSelectedAddress = (value) => {

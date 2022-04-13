@@ -5,17 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const ViewAllBooks = () => {
 
-
     const [bookList, setBookList] = useState([]);
     const navigate = useNavigate();
 
-
-
     useEffect(() => {
+        window.scrollTo(0,0);
         AdminService.viewBookDetails().then((response) => {
-
             setBookList(response.data);
-
         }).catch((error) => {
             console.log("found error", error);
         })
@@ -35,7 +31,7 @@ const ViewAllBooks = () => {
                 <table className="table align-middle mb-0 bg-white table-striped">
                     <thead className="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
                             <th scope="col">NAME</th>
                             <th scope="col">Author</th>
                             <th scope="col">Category</th>
@@ -73,15 +69,11 @@ const ViewAllBooks = () => {
                                     </td>
                                 </tr>
                             )
-
-
                         })}
-
                     </tbody>
                 </table>
             </div>
         </>
-
     );
 }
 export default ViewAllBooks;

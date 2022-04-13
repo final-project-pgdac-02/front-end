@@ -134,7 +134,7 @@ const Login = () => {
     return (
 		<>
 			{loginAsUser && <Navigate to="/" />}
-			{loggedInAsAdmin && <Navigate to="/userdashboard"/>}
+			{loggedInAsAdmin && <Navigate to="/admindashboard"/>}
 			<br />
 			<div className="m-3" style={{ display: "flex" }}>
 				<div className="card p-2 col-3 mx-auto shadow" style={{ display: "block" }}>
