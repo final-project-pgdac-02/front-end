@@ -130,7 +130,14 @@ const Header = () => {
 			console.log("Hi from LOG OUT");
 			return (
 				<>
+					<NavLink to="/userdashboard" className="mx-3 text-decoration-none text-muted">
+						{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
+						<FontAwesomeIcon icon={faUser} className="mx-auto fs-4" />
+						{/* </Button> */}
+					</NavLink>
 					<Nav>
+
+
 						<Nav>
 							<NavLink to="/login" className="fs-5 mx-3 text-decoration-none text-muted">
 								Login
@@ -177,6 +184,9 @@ const Header = () => {
 						{/* <NavLink to="/userdashboard" className="mx-3 text-decoration-none text-muted">
 							Dashboard
 						</NavLink> */}
+
+
+
 						<NavLink to="/userdashboard" className="mx-3 text-decoration-none text-muted">
 							{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
 							<FontAwesomeIcon icon={faUser} className="mx-auto fs-4" />
@@ -188,6 +198,7 @@ const Header = () => {
 							{/* <FontAwesomeIcon icon={faUser} className="mx-auto fs-4" /> */}
 							{/* </Button> */}
 						</NavLink>
+
 						{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
 							<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
 							<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

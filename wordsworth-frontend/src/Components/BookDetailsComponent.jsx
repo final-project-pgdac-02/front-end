@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faComment, faStarHalf, faStar, faCommentMedical } from "@fortawesome/free-solid-svg-icons";
 import { Row, Col } from "react-bootstrap";
@@ -12,6 +12,15 @@ const BookDetailsComponent = (props) => {
 	const bookRating = props.book.averageRating;
 
 	const [isFeedBackVisible, setIsFeedbackVisible] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(false);
+
+	const loggedInUserID = window.sessionStorage.getItem("sessionObjectId");
+
+	useEffect(() => {
+		if(loggedInUserID !== null){
+			setLoggedIn(true);
+		}
+	})
 
 	const onFeedBackClickHandler = () => {
 		setIsFeedbackVisible(!isFeedBackVisible);
@@ -22,7 +31,12 @@ const BookDetailsComponent = (props) => {
 
 	let feedbackHandler = (e) => {
 		e.preventDefault();
-		navigate("/addFeedback/" + id);
+		if(loggedIn){
+			navigate("/addFeedback/" + id);
+		}
+		else{
+			navigate("/login");
+		}
 	};
 
 	const userId = window.sessionStorage.getItem("sessionObjectId");
