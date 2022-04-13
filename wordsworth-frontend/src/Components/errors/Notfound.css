@@ -1,0 +1,49 @@
+body{
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    
+}
+/* body{
+    background-color: #f0d682;
+    opacity: 1;
+    background: radial-gradient(circle, transparent 20%, #f0d682 20%, #f0d682 80%, transparent 80%, transparent),
+    radial-gradient(circle, transparent 20%, #f0d682 20%, #f0d682 80%, transparent 80%, transparent) 17.5px 17.5px,
+    linear-gradient(#ffffff 1.4000000000000001px, transparent 1.4000000000000001px) 0 -0.7000000000000001px,
+    linear-gradient(90deg, #ffffff 1.4000000000000001px, #f0d682 1.4000000000000001px) -0.7000000000000001px 0;
+    background-size: 35px 35px,
+    35px 35px,
+    17.5px 17.5px,
+    17.5px 17.5px;
+} */
+/* body{
+background-color: #f9b677;
+opacity: 1;
+background: radial-gradient(circle, transparent 20%, #f9b677 20%, #f9b677 80%, transparent 80%, transparent),
+radial-gradient(circle, transparent 20%, #f9b677 20%, #f9b677 80%, transparent 80%, transparent) 22.5px 22.5px,
+linear-gradient(#ffffff 1.8px, transparent 1.8px) 0 -0.9px,
+linear-gradient(90deg, #ffffff 1.8px, #f9b677 1.8px) -0.9px 0;
+background-size: 45px 45px,
+45px 45px,
+22.5px 22.5px,
+22.5px 22.5px;
+} */
+
+body{
+    background-color: #fcbb98;
+    opacity: 1;
+    background:  radial-gradient(circle, transparent 20%, #fcbb98 20%, #fcbb98 80%, transparent 80%, transparent),
+    radial-gradient(circle, transparent 20%, #fcbb98 20%, #fcbb98 80%, transparent 80%, transparent) 22.5px 22.5px,
+    linear-gradient(#ffffff 1.8px, transparent 10px) 0 -0.9px,
+    linear-gradient(90deg, #ffffff 1.8px, #fcbb98 1.8px) -0.9px 0;
+    background-size: 45px 45px,
+    45px 45px,
+    22.5px 22.5px,
+    22.5px 22.5px;
+}
+
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+.right.carousel-control,
+.left.carousel-control {
+    visibility: hidden;
+}
