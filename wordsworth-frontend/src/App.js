@@ -35,6 +35,7 @@ import OrderHistoryComponent from './Components/user/OrderHistoryComponent';
 import CustomerDashboardComponent from './Components/user/CustomerDashboardComponent';
 import AdminDashboardComponent from './Components/admin/AdminDashboardComponent';
 import UpgradeMembershipComponent from "./Components/user/UpgradeMembershipComponent";
+import UpdateOrderDetailStatusComponent from './Components/admin/UpdateOrderDetailStatusComponent';
 
 export const UserContext = createContext();
 
@@ -64,7 +65,8 @@ function App() {
 					<Header />
 					<Routes>
 						<Route path="/" element={<BooksListComponent />} />
-						{/* <Route path="/" element={<UpgradeMembershipComponent />} /> */}
+						<Route path="/updateshippingstatus" exact element={<UpdateOrderDetailStatusComponent />} />
+						<Route path="/upgrademembership" element={<UpgradeMembershipComponent />} />
 
 						<Route path="/books/:id" element={<Book />} />
 						<Route path="/login" exact element={<Login />} />
