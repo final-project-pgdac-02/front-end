@@ -4,7 +4,7 @@ import { faBook, faUser, faClipboardUser, faCreditCard } from '@fortawesome/free
 import { faKey, faRightFromBracket, faPersonWalkingDashedLineArrowRight, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { ImBooks } from 'react-icons/im';
 import logo from "../../userprofile.png";
-import messi from "../../messi.jpg";
+// import messi from "../../messi.jpg";
 
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import { Card, Col, Offcanvas, Row } from 'react-bootstrap';
 import AdminService from '../../service/AdminService';
 import UserService from '../../service/UserService';
 import OrderDetailsService from '../../service/OrderDetailsService';
+import DeleteConfirmation from '../admin/DeleteConfirmation';
 
 
 
@@ -26,6 +27,7 @@ const CustomerDashboardComponent = () => {
 
 	const [show1, setShow1] = useState("");
 	const snackBar = window.sessionStorage.getItem("snackbar");
+	const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -36,6 +38,7 @@ const CustomerDashboardComponent = () => {
 
 
 	const [tSum, setTSum] = useState("");
+	const [userId,setUserId] = useState("");
 
 	const [loggedInAsCustomer, setLoggedInAsCustomer] = useState(false);
 	const [loginFalse, setLoginFalse] = useState(false);
@@ -136,27 +139,26 @@ const CustomerDashboardComponent = () => {
 		navigate("/updateProfile/" + userObject1);
 	}
 
+	const onDeleteAUserClick = (id) => {
 
-	const onDeleteAUserClick = () => {
-		const con = window.confirm("Are you sure");
-		if (con) {
-			AdminService.deleteAUser(userObject1).then((response) => {
-				alert(response.data);
-				window.sessionStorage.removeItem("sessionObjectId");
-				window.sessionStorage.removeItem("sessionObjectFirstName");
-				window.sessionStorage.removeItem("sessionObjectEmail");
-				window.sessionStorage.removeItem("sessionObjectRole");
-				window.sessionStorage.removeItem("sessionObjectLastName");
-				window.sessionStorage.setItem("snackbar1", "show");
-				setLogout(true);
-				dispatch({ type: "USER", payload: false });
-				// navigate("/");
-			}).catch((error) => {
-				console.log(error);
-			})
-		}
-
+		AdminService.deleteAUser(id).then((response) => {
+			LogoutClick();
+		}).catch((error) => {
+			console.log(error);
+		})
+		setDisplayConfirmationModal(false);
+		navigate("/login");
 	}
+	const showDeleteModal = (uId) => {
+
+		setUserId(userObject1);
+
+		setDisplayConfirmationModal(true);
+	}
+
+	const hideConfirmationModal = () => {
+		setDisplayConfirmationModal(false);
+	};
 
 
 	return (
@@ -283,7 +285,7 @@ const CustomerDashboardComponent = () => {
 						<div className="col-4" style={{ "margin-left": "33.35%" }}>
 							<div
 								className="p-3 border bg-light rounded text-danger"
-								onClick={onDeleteAUserClick}
+								onClick={() => showDeleteModal(userObject1)}
 								style={{ textAlign: "center", cursor: "pointer"  }}
 							>
 								Deregister Me &nbsp; <FontAwesomeIcon icon={faPersonWalkingDashedLineArrowRight} />
@@ -292,6 +294,7 @@ const CustomerDashboardComponent = () => {
 						</div>
 					</div>
 				</div>
+				<DeleteConfirmation showModal={displayConfirmationModal} confirmModal={onDeleteAUserClick} hideModal={hideConfirmationModal} UID={userId} />
 			</div>
 
 			<div className={show1} id="snackbar">
@@ -304,21 +307,21 @@ const CustomerDashboardComponent = () => {
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<div className="card mx-auto" style={{ width: "22rem" }}>
-							<img src={messi} className="card-img-top" alt="..." />
+							{/* <img src={messi} className="card-img-top" alt="..." /> */}
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
 									<h5 className="fw-light fs-4">
-										NAME : &nbsp;
+										Name : &nbsp;
 										{userObject2}&nbsp;{userObject5}
 									</h5>
 								</li>
 								<li className="list-group-item">
-									<h5 className="fw-light fs-4">E-MAIL : &nbsp;{userObject3}</h5>
+									<h5 className="fw-light fs-4">E-Mail : &nbsp;{userObject3}</h5>
 								</li>
 
 								<li className="list-group-item" style={{ textAlign: "center" }}>
 									<button
-										className="btn btn-primary m-2 fs-4"
+										className="btn btn-primary m-2 fs-5"
 										type="button"
 										onClick={onUpdateUserProfileClick}
 									>

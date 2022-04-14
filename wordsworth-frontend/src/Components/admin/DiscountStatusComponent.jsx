@@ -53,7 +53,7 @@ const DiscountStatusComponent = () => {
 	return (
 		<>
 			{statusEdited && <Navigate to="/membership" />}
-			{loggedInNotAsAdmin && <Navigate to="/login" />}
+			{loggedInNotAsAdmin && <Navigate to="/forbidden" />}
 			<div>
 				<div>
 					<br />

@@ -9,6 +9,10 @@ const ViewAllBooks = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const role = window.sessionStorage.getItem("sessionObjectRole");
+        if(role!== "ADMIN"){
+            navigate("/forbidden");
+        }
         window.scrollTo(0,0);
         AdminService.viewBookDetails().then((response) => {
             setBookList(response.data);

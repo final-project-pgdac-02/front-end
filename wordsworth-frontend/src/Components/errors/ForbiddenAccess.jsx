@@ -1,11 +1,10 @@
-import "./Notfound.css"
+import "./Notfound.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faHeartBroken, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faHeartBroken, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 
-
-const Notfound = () => {
-    return (
+const ForbiddenAccess = () => {
+	return (
 		<div>
 			<br />
 			<br />
@@ -13,15 +12,17 @@ const Notfound = () => {
 				<div className="row g-0 d-flex flex-wrap align-items-center">
 					<div className="card-body error-template">
 						<h1 className="card-title display-1 text-center m-1 ">
-							Oops{" "}
+							Oops
 							<span className="text-danger">
 								<FontAwesomeIcon icon={faHeartBroken} />
 							</span>
 						</h1>
 						<br />
-						<h2 className="display-4">404 Not Found!</h2>
-						<div className="error-details lead">Sorry, an error has occured.</div>
-						<div className="error-details lead">The requested page could not be found!</div>
+						<h2 className="display-4">403 Forbidden!</h2>
+						<div className="error-details lead">Sorry!</div>
+						<div className="error-details lead">
+							The page you are trying to access is forbidden for you!
+						</div>
 						<div className="error-actions">
 							<br />
 							<NavLink to={"/"}>
@@ -35,5 +36,5 @@ const Notfound = () => {
 			</div>
 		</div>
 	);
-}
-export default Notfound;
+};
+export default ForbiddenAccess;

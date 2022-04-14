@@ -111,7 +111,7 @@ const Header = () => {
 				<>
 					
 					<Nav>
-						<NavDropdown title={userObject2} id="basic-nav-dropdown">
+						<NavDropdown title={userObject2} id="basic-nav-dropdown" className="fs-5">
 							{navbarList2.map((ele, key) => {
 								return (
 
@@ -133,17 +133,20 @@ const Header = () => {
 			return (
 				<>
 					<Nav>
-						<NavDropdown title={userObject2} id="basic-nav-dropdown">
+						<NavDropdown title={userObject2} id="basic-nav-dropdown" className="fs-5">
 							{navbarList3.map((ele, key) => {
 								return (
-									<NavDropdown.Item ><NavLink to={ele.to} style={{ color: 'grey', textDecoration: 'none' }}>
-										{ele.name}
-									</NavLink>
+									<NavDropdown.Item>
+										<NavLink to={ele.to} style={{ color: "grey", textDecoration: "none" }}>
+											{ele.name}
+										</NavLink>
 									</NavDropdown.Item>
 								);
 							})}
 							<NavDropdown.Divider />
-							<NavDropdown.Item className='btn btn-primary' onClick={LogoutClick2}>Log Out</NavDropdown.Item>
+							<NavDropdown.Item className="btn btn-primary" onClick={LogoutClick2}>
+								Log Out
+							</NavDropdown.Item>
 						</NavDropdown>
 					</Nav>
 				</>
@@ -152,10 +155,7 @@ const Header = () => {
 			console.log("Hi from LOG OUT");
 			return (
 				<>
-
 					<Nav>
-
-
 						<Nav>
 							<NavLink to="/login" className="fs-5 mx-3 text-decoration-none text-muted">
 								Login

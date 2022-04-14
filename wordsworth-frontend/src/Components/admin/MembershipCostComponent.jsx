@@ -65,7 +65,7 @@ const MembershipCostComponent = () => {
 	return (
 		<>
 			{costEdited && <Navigate to="/membership" />}
-			{loggedInNotAsAdmin && <Navigate to="/login" />}
+			{loggedInNotAsAdmin && <Navigate to="/forbidden" />}
 			<div>
 				<div>
 					<br />
@@ -89,8 +89,8 @@ const MembershipCostComponent = () => {
 											aria-describedby="inputGroup-sizing-lg"
 											min={0}
 											step={0.01}
-                                            value={cost}
-                                            onChange={membershipCostHandler}
+											value={cost}
+											onChange={membershipCostHandler}
 										/>
 									</div>
 								</div>
