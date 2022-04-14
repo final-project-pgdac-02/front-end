@@ -30,7 +30,7 @@ const MembershipDashboardComponent = () => {
 
 	return (
 		<>
-			{loggedInNotAsAdmin && <Navigate to="/login" />}
+			{loggedInNotAsAdmin && <Navigate to="/forbidden" />}
 
 			<div>
 				<br />

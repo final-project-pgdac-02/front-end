@@ -4,7 +4,7 @@ import { faBook, faUser, faClipboardUser, faCreditCard } from '@fortawesome/free
 import { faKey, faRightFromBracket, faPersonWalkingDashedLineArrowRight, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { ImBooks } from 'react-icons/im';
 import logo from "../../userprofile.png";
-import messi from "../../messi.jpg";
+// import messi from "../../messi.jpg";
 
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -307,7 +307,7 @@ const CustomerDashboardComponent = () => {
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<div className="card mx-auto" style={{ width: "22rem" }}>
-							<img src={messi} className="card-img-top" alt="..." />
+							{/* <img src={messi} className="card-img-top" alt="..." /> */}
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
 									<h5 className="fw-light fs-4">

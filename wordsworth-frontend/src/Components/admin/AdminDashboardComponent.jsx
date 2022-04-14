@@ -4,7 +4,7 @@ import { faBook, faUser, faClipboardUser } from '@fortawesome/free-solid-svg-ico
 import { faKey, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { ImBooks } from 'react-icons/im';
 import logo from "../../userprofile.png";
-import messi from "../../messi.jpg";
+// import messi from "../../messi.jpg";
 
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";

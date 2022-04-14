@@ -76,65 +76,64 @@ const UpdateBookStockComponent = (props) => {
     };
 
     return (
-        <div>
-            <>
-                {loggedInNotAsAdmin && <Navigate to="/login" />}
-                <div>
-                    <br />
-                    <br />
-                    <div className="card mx-auto shadow" style={{ width: "55%" }}>
-                        <div className="row g-0 d-flex flex-wrap align-items-center">
-                            <div className="card-body">
-                                <h1 className="card-title display-4 text-center m-1 ">Update Book Stock</h1>
-                                <hr />
-                            </div>
-                            <form onSubmit={OnUpdateStockClick}>
-                                <div className=" col-7 mx-auto m-3 ">
-                                    <label htmlFor="title" className="form-label ">
-                                        Book Title
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="title"
-                                        aria-describedby="title"
-                                        placeholder="The Memoirs of Sherlock Holmes"
-                                        // onChange={titleTextHandler}
-                                        value={title}
-                                        disabled
-                                    />
-                                    {/* <span className="text-danger">{titleErr}</span> */}
-                                </div>
+		<div>
+			<>
+				{loggedInNotAsAdmin && <Navigate to="/forbidden" />}
+				<div>
+					<br />
+					<br />
+					<div className="card mx-auto shadow" style={{ width: "55%" }}>
+						<div className="row g-0 d-flex flex-wrap align-items-center">
+							<div className="card-body">
+								<h1 className="card-title display-4 text-center m-1 ">Update Book Stock</h1>
+								<hr />
+							</div>
+							<form onSubmit={OnUpdateStockClick}>
+								<div className=" col-7 mx-auto m-3 ">
+									<label htmlFor="title" className="form-label ">
+										Book Title
+									</label>
+									<input
+										type="text"
+										className="form-control"
+										id="title"
+										aria-describedby="title"
+										placeholder="The Memoirs of Sherlock Holmes"
+										// onChange={titleTextHandler}
+										value={title}
+										disabled
+									/>
+									{/* <span className="text-danger">{titleErr}</span> */}
+								</div>
 
+								<div className="col-7 mx-auto m-3">
+									<label htmlFor="stock" className="form-label ">
+										Stock
+									</label>
+									<input
+										type="number"
+										className="form-control"
+										id="stock"
+										placeholder="Update Book Stock"
+										min={1}
+										onChange={stockTextHandler}
+										value={stock}
+									/>
+									<span className="text-danger">{stockErr}</span>
+								</div>
 
-                                <div className="col-7 mx-auto m-3">
-                                    <label htmlFor="stock" className="form-label ">
-                                        Stock
-                                    </label>
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        id="stock"
-                                        placeholder="Update Book Stock"
-                                        min={1}
-                                        onChange={stockTextHandler}
-                                        value={stock}
-                                    />
-                                    <span className="text-danger">{stockErr}</span>
-                                </div>
-
-                                <div className="text-center col-5 mx-auto m-5">
-                                    <button type="submit" className="btn btn-warning btn-lg fs-4">
-                                        Update Book Stock
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </>
-        </div>
-    );
+								<div className="text-center col-5 mx-auto m-5">
+									<button type="submit" className="btn btn-warning btn-lg fs-4">
+										Update Book Stock
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</>
+		</div>
+	);
 };
 
 

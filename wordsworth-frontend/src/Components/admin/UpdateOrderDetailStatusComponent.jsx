@@ -8,7 +8,7 @@ const UpdateOrderDetailStatusComponent = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (role !== "ADMIN") navigate("/");
+		if (role !== "ADMIN") navigate("/forbidden");
 	}, []);
 
 	const [orderDetailId, setOrderDetailId] = useState();

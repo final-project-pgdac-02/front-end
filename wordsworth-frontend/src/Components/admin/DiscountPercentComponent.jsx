@@ -38,7 +38,7 @@ const DiscountPercentComponent = () => {
 	return (
 		<>
 			{percentEdited && <Navigate to="/membership" />}
-			{loggedInNotAsAdmin && <Navigate to="/login" />}
+			{loggedInNotAsAdmin && <Navigate to="/forbidden" />}
 			<div>
 				<div>
 					<br />
