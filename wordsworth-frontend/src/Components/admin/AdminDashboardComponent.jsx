@@ -298,7 +298,7 @@ const AdminDashboardComponent = () => {
 								Update Shipping Status &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
 						</div>
-						<div className="col-4">
+						<div className="col-4 mx-auto">
 							<div
 								className="p-3 border bg-light rounded"
 								data-aos={animationZoomIn6}

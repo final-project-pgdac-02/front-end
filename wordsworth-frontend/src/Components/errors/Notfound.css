@@ -39,6 +39,12 @@ background-size: 45px 45px,
     22.5px 22.5px,
     22.5px 22.5px;
 } */
+body {
+    background-color: #fcbb98;
+    opacity: 1;
+    background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #fcbb98 40px),
+        repeating-linear-gradient(#ffffff55, #ffffff);
+}
 
 .error-template {padding: 40px 15px;text-align: center;}
 .error-actions {margin-top:15px;margin-bottom:15px;}

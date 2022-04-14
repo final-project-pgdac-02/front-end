@@ -308,17 +308,17 @@ const CustomerDashboardComponent = () => {
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
 									<h5 className="fw-light fs-4">
-										NAME : &nbsp;
+										Name : &nbsp;
 										{userObject2}&nbsp;{userObject5}
 									</h5>
 								</li>
 								<li className="list-group-item">
-									<h5 className="fw-light fs-4">E-MAIL : &nbsp;{userObject3}</h5>
+									<h5 className="fw-light fs-4">E-Mail : &nbsp;{userObject3}</h5>
 								</li>
 
 								<li className="list-group-item" style={{ textAlign: "center" }}>
 									<button
-										className="btn btn-primary m-2 fs-4"
+										className="btn btn-primary m-2 fs-5"
 										type="button"
 										onClick={onUpdateUserProfileClick}
 									>
