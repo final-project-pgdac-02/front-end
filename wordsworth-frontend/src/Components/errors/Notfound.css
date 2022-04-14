@@ -45,13 +45,17 @@ background-size: 45px 45px,
     background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #fcbb98 60px),
         repeating-linear-gradient(#ffffff55, #ffffff);
 } */
-body{
+ /* body{
     background-color: #4158D0;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-}
+} */
+
 body{
     background-image: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 14.7%, rgba(89, 97, 223, 1) 88.7%);
 }
+/* body{
+    background-image: linear-gradient(92.7deg, rgba(245, 212, 212, 1) 8.5%, rgba(252, 251, 224, 1) 90.2%);
+} */
 
 .error-template {padding: 40px 15px;text-align: center;}
 .error-actions {margin-top:15px;margin-bottom:15px;}

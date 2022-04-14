@@ -24,7 +24,7 @@ const AddBookComponent = () => {
 	const [author, setAuthor] = useState("");
 	const [publication, setPublication] = useState("");
 	const [category, setCategory] = useState("");
-	const [bookCover, setBookCover] = useState("#");
+	const [bookCover, setBookCover] = useState("");
 	const [stock, setStock] = useState("");
 	const [averageRating, setAverageRating] = useState(0);
 	const [price, setPrice] = useState("");
