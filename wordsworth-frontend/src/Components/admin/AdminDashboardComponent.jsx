@@ -222,7 +222,7 @@ const AdminDashboardComponent = () => {
 							<div
 								className="p-3 border bg-light rounded"
 								onClick={()=>navigate("/updateshippingstatus")}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center" , cursor:"pointer"}}
 							>
 								Update Shipping Status &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
