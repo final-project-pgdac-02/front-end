@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const UpdateOrderDetailStatusComponent = () => {
-
-    const [loading, setLoading] = useState(false);
+    
     const role = window.sessionStorage.getItem("sessionObjectRole");
     const navigate = useNavigate();
 
@@ -68,7 +67,7 @@ const UpdateOrderDetailStatusComponent = () => {
                 </div> */}
                 <div className="card-body col-4 ">
                     <h5 class="card-title">Enter order detail Id:</h5>
-                    <input type="number" name="oid" id="oid" value={orderDetailId} onChange={onOrderDetailIdChangehandler} onBlur={onShowShippingStatus} />
+                    <input type="number" name="oid" id="oid" value={orderDetailId} onChange={onOrderDetailIdChangehandler} />
                     <input type="button" value="Show shipping status" onClick={onShowShippingStatus} />
                     {/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> */}
                     <br />
