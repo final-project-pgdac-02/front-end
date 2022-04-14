@@ -32,14 +32,6 @@ const AdminDashboardComponent = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	const [animationZoomIn1, setAnimationZoomIn1] = useState();
-	const [animationZoomIn2, setAnimationZoomIn2] = useState();
-	const [animationZoomIn3, setAnimationZoomIn3] = useState();
-	const [animationZoomIn4, setAnimationZoomIn4] = useState();
-	const [animationZoomIn5, setAnimationZoomIn5] = useState();
-	const [animationZoomIn6, setAnimationZoomIn6] = useState();
-	const [animationZoomIn7, setAnimationZoomIn7] = useState();
-
 	const [allUsers, setAllUsers] = useState([]);
 	const [allBooks, setAllBooks] = useState([]);
 
@@ -67,7 +59,6 @@ const AdminDashboardComponent = () => {
 
 
 	useEffect(() => {
-		//  window.scrollTo(0, 0);
 
 		if (snackBar === "show") {
 			console.log(snackBar);
@@ -109,56 +100,6 @@ const AdminDashboardComponent = () => {
 		setLogout(true);
 		dispatch({ type: "USER", payload: false });
 	};
-
-	const mouseOverAnimation1 = () => {
-		setAnimationZoomIn1("fade-up");
-		setTimeout(() => {
-			setAnimationZoomIn1();
-			clearTimeout();
-		}, 700)
-	}
-	const mouseOverAnimation2 = () => {
-		setAnimationZoomIn2("flip-left");
-		setTimeout(() => {
-			setAnimationZoomIn2();
-			clearTimeout();
-		}, 700)
-	}
-	const mouseOverAnimation3 = () => {
-		setAnimationZoomIn3("fade-down");
-		setTimeout(() => {
-			setAnimationZoomIn3();
-			clearTimeout();
-		}, 700)
-	}
-	const mouseOverAnimation4 = () => {
-		setAnimationZoomIn4("flip-right");
-		setTimeout(() => {
-			setAnimationZoomIn4();
-			clearTimeout();
-		}, 700)
-	}
-	const mouseOverAnimation5 = () => {
-		setAnimationZoomIn5("flip-up");
-		setTimeout(() => {
-			setAnimationZoomIn5();
-			clearTimeout();
-		}, 700)
-	}
-	const mouseOverAnimation6 = () => {
-		setAnimationZoomIn6("zoom-in");
-		setTimeout(() => {
-			setAnimationZoomIn6();
-			clearTimeout();
-		}, 700)
-	}
-	const mouseOverAnimation7 = () => {
-		setAnimationZoomIn7("flip-down");
-		setTimeout(() => {
-			setAnimationZoomIn7();
-			clearTimeout();
-		}, 700)
-	}
 
 	const updatePasswordClick = (event) => {
 		event.preventDefault();
@@ -235,10 +176,8 @@ const AdminDashboardComponent = () => {
 						<div className="col-4">
 							<div
 								className="p-3 border bg-light rounded"
-								data-aos={animationZoomIn1}
-								onMouseOver={mouseOverAnimation1}
 								onClick={addABookClick}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", cursor:"pointer" }}
 							>
 								Add an Book &nbsp; <FontAwesomeIcon icon={faBook} />
 							</div>
@@ -246,10 +185,8 @@ const AdminDashboardComponent = () => {
 						<div className="col-4">
 							<div
 								className="p-3 border bg-light rounded"
-								data-aos={animationZoomIn2}
-								onMouseOver={mouseOverAnimation2}
 								onClick={updatePasswordClick}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", cursor:"pointer" }}
 							>
 								Change Password &nbsp; <FontAwesomeIcon icon={faKey} />
 							</div>
@@ -257,10 +194,8 @@ const AdminDashboardComponent = () => {
 						<div className="col-4">
 							<div
 								className="p-3 border bg-light rounded"
-								data-aos={animationZoomIn3}
-								onMouseOver={mouseOverAnimation3}
 								onClick={onViewAllUsersClick}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", cursor:"pointer" }}
 							>
 								View All Users &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
@@ -268,10 +203,8 @@ const AdminDashboardComponent = () => {
 						<div className="col-4">
 							<div
 								className="p-3 border bg-light rounded"
-								data-aos={animationZoomIn4}
-								onMouseOver={mouseOverAnimation4}
 								onClick={onViewAllBooksClick}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", cursor:"pointer" }}
 							>
 								View All Books &nbsp; <ImBooks />
 							</div>
@@ -279,10 +212,8 @@ const AdminDashboardComponent = () => {
 						<div className="col-4">
 							<div
 								className="p-3 border bg-light rounded"
-								data-aos={animationZoomIn5}
-								onMouseOver={mouseOverAnimation5}
 								onClick={UpgradeMembershipClick}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", cursor:"pointer" }}
 							>
 								Upgrade Membership &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
 							</div>
@@ -290,10 +221,8 @@ const AdminDashboardComponent = () => {
 						<div className="col-4">
 							<div
 								className="p-3 border bg-light rounded"
-								data-aos={animationZoomIn6}
-								onMouseOver={mouseOverAnimation6}
 								onClick={handleShow}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", cursor:"pointer" }}
 							>
 								View Profile &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
@@ -301,10 +230,8 @@ const AdminDashboardComponent = () => {
 						<div className="col-4" style={{ "margin-left": "33.35%" }}>
 							<div
 								className="p-3 border bg-light rounded"
-								data-aos={animationZoomIn7}
-								onMouseOver={mouseOverAnimation7}
 								onClick={LogoutClick}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", cursor:"pointer" }}
 							>
 								Logout &nbsp; <FontAwesomeIcon icon={faRightFromBracket} />
 							</div>
@@ -313,115 +240,6 @@ const AdminDashboardComponent = () => {
 					</div>
 				</div>
 			</div>
-
-			{/* chnages now */}
-
-			{/* 
-			<div className="card mx-auto shadow" style={{ width: "75%" }}>
-				<div className="row g-0 d-flex flex-wrap align-items-center">
-
-					<div className="col">
-						<img src={logo} className="p-3 d-block mx-auto" alt="book cover" style={{ width: "16%" }} />
-					</div>
-				</div>
-				<div className="row g-0">
-					<h1 className="display-5 p-4 text-center text-muted">Welcome back, {userObject2}</h1>
-				</div>
-				<div className="row m-3 g-0 d-flex flex-wrap align-items-center">
-					<div className="col text-center">
-						<button
-							type="button"
-							className="btn btn-outline-primary btn-lg fs-3 border-5"
-							style={{ width: "70%", height: "fit-content" }}
-							onClick={addABookClick}
-
-						>
-							Add an Book &nbsp; <FontAwesomeIcon icon={faBook} />
-						</button>
-					</div>
-
-					<div className="col text-center">
-						<button
-							type="button"
-							className="btn btn-outline-warning btn-lg fs-3 border-5 "
-							style={{ width: "70%", height: "fit-content" }}
-							onClick={updatePasswordClick}
-						>
-							Change Password &nbsp; <FontAwesomeIcon icon={faKey} />
-						</button>
-					</div>
-
-					<div className="col text-center">
-						<button
-							type="button"
-							className="btn btn-outline-primary btn-lg fs-3 border-5"
-							style={{ width: "70%", height: "fit-content" }}
-							onClick={onViewAllUsersClick}
-
-						>
-							View All Users &nbsp; <FontAwesomeIcon icon={faUser} />
-						</button>
-					</div>
-					<div className="col text-center">
-						<button
-							type="button"
-							className="btn btn-outline-warning btn-lg fs-3 border-5"
-							style={{ width: "70%", height: "fit-content" }}
-							onClick={onViewAllBooksClick}
-
-						>
-							View All Books &nbsp; < ImBooks />
-						</button>
-					</div>
-
-					<div className="col text-center">
-						<button
-							type="button"
-							className="btn btn-outline-warning btn-lg fs-3 border-5 "
-							style={{ width: "70%", height: "fit-content" }}
-							onClick={UpgradeMembershipClick}
-						>
-							Upgrade Membership &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
-						</button>
-					</div>
-				</div>
-				<div className="row m-3 g-0 d-flex flex-wrap align-items-center">
-					<div className="col text-center ">
-
-						<button className="btn btn-outline-info btn-lg fs-3 border-5"
-							type="button" onClick={handleShow}
-						// style={{ width: "40%", height: "fit-content" }}
-						// onClick={handleShow}
-						>
-							View Profile &nbsp; <FontAwesomeIcon icon={faUser} />
-						</button>
-
-
-					</div>
-				</div>
-				<div className="row m-3 g-0 d-flex flex-wrap align-items-center">
-					<div className="col text-center">
-						<button
-							type="button"
-							className="btn btn-outline-danger fs-3 border-5 m-2"
-							style={{ width: "50%", height: "fit-content" }}
-							onClick={LogoutClick}
-						>
-							Logout &nbsp; <FontAwesomeIcon icon={faRightFromBracket} />
-						</button>
-					</div>
-					{/* <div className="col text-center">
-						<button
-							type="button"
-							className="btn btn-outline-danger fs-3 border-5 m-2"
-							style={{ width: "50%", height: "fit-content" }}
-						>
-							Deregister Me &nbsp; <FontAwesomeIcon icon={faPersonWalkingDashedLineArrowRight} />
-						</button>
-					</div> */}
-
-			{/* </div> */}
-			{/* </div> */}
 
 			<div className={show1} id="snackbar">
 				LogIn Successfull

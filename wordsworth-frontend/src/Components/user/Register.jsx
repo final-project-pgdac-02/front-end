@@ -22,13 +22,14 @@ const Register = () => {
 	const [lastrNameErr, setLastNameErr] = useState("");
 	const [emailErr, setEmailErr] = useState("");
 	const [confirmEmailErr, setConfirmEmailErr] = useState("");
-	const [passwordErr, setPasswordErr] = useState("");
+	const [passwordErr1, setPasswordErr1] = useState("");
+	const [passwordErr2,setPasswordErr2] = useState("");
 	const [confirmPasswordErr, setConfirmPasswordErr] = useState("");
 	const [phoneNumberErr, setPhoneNumberErr] = useState("");
 
 	let firstNameTextHandler = (event) => {
 		setFirstName(event.target.value);
-		if(firstNameErr !== null || firstNameErr !== ""){
+		if (firstNameErr !== null || firstNameErr !== "") {
 			setFirstNameErr("");
 		}
 		// console.log(firstName);
@@ -36,7 +37,7 @@ const Register = () => {
 
 	let lastNameTextHandler = (event) => {
 		setLastName(event.target.value);
-		if(lastrNameErr !== null || lastrNameErr !== ""){
+		if (lastrNameErr !== null || lastrNameErr !== "") {
 			setLastNameErr("");
 		}
 		// console.log(lastName);
@@ -44,7 +45,7 @@ const Register = () => {
 
 	let emailTextHandler = (event) => {
 		setEmail(event.target.value);
-		if(emailErr !== null || emailErr !== ""){
+		if (emailErr !== null || emailErr !== "") {
 			setEmailErr("");
 		}
 		// console.log(email);
@@ -52,7 +53,7 @@ const Register = () => {
 
 	let confirmEmailTextHandler = (event) => {
 		setConfirmEmail(event.target.value);
-		if(confirmEmailErr !== null || confirmEmailErr !== ""){
+		if (confirmEmailErr !== null || confirmEmailErr !== "") {
 			setConfirmEmailErr("");
 		}
 		// console.log(confirmEmail);
@@ -60,15 +61,18 @@ const Register = () => {
 
 	let passwordTextHandler = (event) => {
 		setPassword(event.target.value);
-		if(passwordErr !== null || passwordErr !== ""){
-			setPasswordErr("");
+		if (passwordErr1 !== null || passwordErr1 !== "") {
+			setPasswordErr1("");
+		}
+		if(passwordErr2 !==- null || passwordErr2 !== ""){
+			setPasswordErr2("");
 		}
 		// console.log(password);
 	};
 
 	let confirmPasswordTextHandler = (event) => {
 		setConfirmPassword(event.target.value);
-		if(confirmPasswordErr !== null || confirmPasswordErr !== ""){
+		if (confirmPasswordErr !== null || confirmPasswordErr !== "") {
 			setConfirmPasswordErr("");
 		}
 		// console.log(confirmEmail);
@@ -76,7 +80,7 @@ const Register = () => {
 
 	let phoneNumberTextHandler = (event) => {
 		setPhoneNumber(event.target.value);
-		if(phoneNumberErr !== null || phoneNumberErr !== ""){
+		if (phoneNumberErr !== null || phoneNumberErr !== "") {
 			setPhoneNumberErr("");
 		}
 		// console.log(phoneNumber);
@@ -84,6 +88,9 @@ const Register = () => {
 
 	let validation = () => {
 		let flag = true;
+		let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		let passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*+-])([a-zA-Z0-9!@#$%^&*+-]{8,20})$/;
+
 
 		if (firstName === null || firstName === "") {
 			setFirstNameErr("This Field is Mandatory");
@@ -98,6 +105,9 @@ const Register = () => {
 		if (email === null || email === "") {
 			setEmailErr("This Field is Mandatory");
 			flag = false;
+		} else if (!mailformat.test(email)) {
+			setEmailErr("Invalid Email Address entered.");
+			flag = false;
 		}
 
 		if (confirmEmail === null || confirmEmail === "") {
@@ -109,8 +119,15 @@ const Register = () => {
 		}
 
 		if (password === null || password === "") {
-			setPasswordErr("This Field is Mandatory");
+			setPasswordErr1("This Field is Mandatory");
 			flag = false;
+
+		} else if (!passwordRegex.test(password)) {
+			setPasswordErr1("There must be atleast one number,one special character,spaces not allowed & password length must be between 8-20 character");
+			flag = false;
+		} else{
+			setPasswordErr2("Valid Password");
+			flag = true;
 		}
 
 		if (confirmPassword === null || confirmPassword === "") {
@@ -138,17 +155,17 @@ const Register = () => {
 			setLastNameErr("");
 			setEmailErr("");
 			setConfirmEmailErr("");
-			setPasswordErr("");
+			setPasswordErr1("");
+			setPasswordErr2("");
 			setConfirmPasswordErr("");
 			setPhoneNumberErr("");
 
 			let userObject = { firstName, lastName, email, password, phone: phoneNumber, role };
-			window.sessionStorage.setItem("snackbar2","show");
-
+			window.sessionStorage.setItem("snackbar2", "show");
 
 			UserService.processRegisterForm(userObject)
 				.then((response) => {
-                    window.alert("Registered Successfully!");
+					window.alert("Registered Successfully!");
 					// console.log("Register successfully", response.data);
 					setRegistrationDone(true);
 				})
@@ -164,11 +181,6 @@ const Register = () => {
 			<div className="card m-5 shadow" style={{ width: "90rem" }}>
 				<div className="row g-0 d-flex flex-wrap align-items-center">
 					<div className="col-4">
-						{/* <img
-							src="https://images.fineartamerica.com/images-medium-large-5/sherlock-holmes-book-cover-poster-art-1-nishanth-gopinathan.jpg"
-							className="img-fluid p-3"
-							alt="book cover"
-						/> */}
 						<CarouselComponent />
 					</div>
 					<div className="col-md-8">
@@ -210,7 +222,7 @@ const Register = () => {
 									Email Address
 								</label>
 								<input
-									type="email"
+									type="text"
 									className="form-control fst-italic"
 									placeholder="will.worth@gmail.com"
 									id="em"
@@ -224,7 +236,7 @@ const Register = () => {
 									Confirm Email Address
 								</label>
 								<input
-									type="email"
+									type="text"
 									className="form-control fst-italic"
 									placeholder="will.worth@gmail.com"
 									id="cem"
@@ -238,21 +250,22 @@ const Register = () => {
 									Password
 								</label>
 								<input
-									type="password"
+									type="text"
 									className="form-control"
 									placeholder="* * * * * * * * * *"
 									id="pass"
 									onChange={passwordTextHandler}
 									value={password}
 								/>
-								<span className="text-danger">{passwordErr}</span>
+								<span className="text-danger">{passwordErr1}</span>
+								<span className="text-success">{passwordErr2}</span>
 							</div>
 							<div className="col-5">
 								<label htmlFor="cpass" className="form-label">
 									Confirm Password
 								</label>
 								<input
-									type="password"
+									type="text"
 									className="form-control"
 									placeholder="* * * * * * * * * *"
 									id="cpass"
@@ -270,6 +283,7 @@ const Register = () => {
 									className="form-control"
 									id="phn"
 									placeholder="9797979797"
+									pattern="[0-9]{10}"
 									onChange={phoneNumberTextHandler}
 									value={phoneNumber}
 								/>
