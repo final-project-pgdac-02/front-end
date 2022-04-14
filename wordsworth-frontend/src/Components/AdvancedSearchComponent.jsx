@@ -19,6 +19,7 @@ const AdvancedSearchComponent = () => {
 		e.preventDefault();
 		console.log("clicked!!");
 		setShow(!show);
+		// if(category!=="" && rating!=="")
 		navigate(`/advancedsearchresult?category=${category}&rating=${rating}&min=${minPrice.toString()}&max=${maxPrice.toString()}`);
 		setCategory("");
 		setRating(1);

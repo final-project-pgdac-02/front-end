@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UpdateOrderDetailStatusComponent = () => {
-	const [loading, setLoading] = useState(false);
+	// const [loading, setLoading] = useState(false);
 	const role = window.sessionStorage.getItem("sessionObjectRole");
 	const navigate = useNavigate();
 

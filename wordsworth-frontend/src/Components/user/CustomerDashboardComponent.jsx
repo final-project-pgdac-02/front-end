@@ -298,7 +298,7 @@ const CustomerDashboardComponent = () => {
 			</div>
 
 			<div className={show1} id="snackbar">
-				LogIn Successfull
+				Login Successful
 			</div>
 			<div>
 				<Offcanvas show={show} onHide={handleClose}>
