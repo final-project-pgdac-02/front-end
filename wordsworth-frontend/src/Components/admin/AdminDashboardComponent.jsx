@@ -202,7 +202,7 @@ const AdminDashboardComponent = () => {
 			<div className="card mx-auto shadow" style={{ width: "75%" }}>
 				<div className="row g-0 d-flex flex-wrap align-items-center">
 					<div className="col">
-						<img src={logo} className="p-3 d-block mx-auto" alt="book cover" style={{ width: "16%" }} />
+						<img src={logo} className="p-3 d-block mx-auto" alt="admin icon" style={{ width: "16%" }} />
 					</div>
 				</div>
 				<div className="row g-0">
@@ -284,7 +284,18 @@ const AdminDashboardComponent = () => {
 								onClick={UpgradeMembershipClick}
 								style={{ textAlign: "center" }}
 							>
-								Upgrade Membership &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
+								Manage Memberships &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
+							</div>
+						</div>
+						<div className="col-4">
+							<div
+								className="p-3 border bg-light rounded"
+								data-aos={animationZoomIn6}
+								onMouseOver={mouseOverAnimation6}
+								onClick={()=>navigate("/updateshippingstatus")}
+								style={{ textAlign: "center" }}
+							>
+								Update Shipping Status &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
 						</div>
 						<div className="col-4">

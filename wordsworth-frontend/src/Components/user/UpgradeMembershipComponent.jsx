@@ -4,48 +4,100 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 
 const UpgradeMembershipComponent = () => {
-	let originalPlan = "SILVER";
+
+	const [showPriceTier, setShowPriceTier]=useState(false);
+
+	useEffect(() => {
+		getDetails();
+	}, []);
+
+	const [membershipList, setMembershipList] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const userId = window.sessionStorage.getItem("sessionObjectId");
+	const userFirstName = window.sessionStorage.getItem("sessionObjectFirstName");
+	const userLastName = window.sessionStorage.getItem("sessionObjectLastName");
+	const [userMembership, setUserMembership]=useState();
+
+	const [chosenMembership, setChosenMemberhsip]=useState();
+
+	const [membershipCost,setMembershipCost]=useState(0);
+
+	// const
+
+	const getUserMembershipDetails=async()=>{
+		try{
+			const res=await axios.get(`http://localhost:8080/user/membership/${userId}`);
+		setUserMembership(res.data);
+		setChosenMemberhsip(res.data.id)
+		// setLoading(true);
+		}
+		catch(err){
+			console.log(err);
+		}
+		
+	}
+	// let originalPlan = "SILVER";
 
 	const getMembershipList = async () => {
 		try {
 			const res = await axios.get("http://localhost:8080/memberships/");
 			setMembershipList(res.data);
-            // if (membershipList.length !== 0) {
-			// 	console.table(membershipList);
-			// 	console.log(membershipList.length);
-			// 	setLoading(true);
-			// }
 		} catch (err) {
 			alert(err);
 		}
 	};
-	const [membershipList, setMembershipList] = useState([]);
-	const [loading, setLoading] = useState(false);
+
+	const getDetails=async()=>{
+		await getMembershipList();
+		await getUserMembershipDetails();
+		setLoading(true);
+	}
+
+	const onMemberShipChooseHandler=async (event)=>{
+		setChosenMemberhsip(event.target.value);
+		console.log(chosenMembership);
+		console.log("user mem: "+userMembership.id)
+		await getShowPriceTier();
+	}
+
 	useEffect(() => {
-		window.scrollTo(0, 0);
-		getMembershipList();
-		// if (membershipList.length !== 0) {
-		// 	console.table(membershipList);
-		// 	console.log(membershipList.length);
-			setLoading(true);
-		// }
-	}, []);
+		getShowPriceTier();
+	}, [chosenMembership]);
 
-	const [plan, setPlan] = useState("");
-
-	const [planErr, setPlanErr] = useState("");
-
-	const selectHandler = (e) => {
-		console.log(e.target.value);
-		setPlan(e.target.value);
-		console.log(plan);
-	};
-
-	const submitHandler = (e) => {
-		e.preventDefault();
-		if (plan === originalPlan) {
+	const getShowPriceTier=async()=>{
+		if(parseInt(chosenMembership)!==parseInt(userMembership.id)){
+			setShowPriceTier(true);
+			console.log("trueeeeee");
 		}
-	};
+		else{
+			setShowPriceTier(false);
+			console.log("falseeeeee");
+		}
+		getMembershipCost(chosenMembership);
+	}
+
+	const getMembershipCost=(chosenMembership)=>{
+		const membership=membershipList.filter(item=>parseInt(item.id)===parseInt(chosenMembership))
+		console.log(membership[0].membershipCost);
+		setMembershipCost(membership[0].membershipCost);
+	}
+
+	const onPayClickHandler=async()=>{
+		const confirm=window.confirm(`You are about to pay: ₹ ${membershipCost}`);
+		if(confirm){
+			try{
+				const res=await axios.put(`http://localhost:8080/user/upgrademembership/`,{
+			userId:userId,
+			membershipId:chosenMembership
+		})
+		alert(res.data);
+			}
+			catch(err){
+				alert(err);
+			}	
+		}
+		
+	}
 
 	return (
 		<>
@@ -59,7 +111,7 @@ const UpgradeMembershipComponent = () => {
 								<h1 className="card-title display-4 text-center m-1 ">Upgrade Membership </h1>
 								<hr />
 							</div>
-							<form onSubmit={submitHandler}>
+							<form>
 								<div className=" col-6 mx-auto m-3 ">
 									<label htmlFor="id" className="form-label ">
 										User ID
@@ -68,6 +120,20 @@ const UpgradeMembershipComponent = () => {
 										type="text"
 										className="form-control"
 										id="id"
+										aria-describedby="id"
+										value={userId}
+										disabled
+									/>
+								</div>
+								<div className=" col-6 mx-auto m-3 ">
+									<label htmlFor="id" className="form-label ">
+										User Name
+									</label>
+									<input
+										type="text"
+										className="form-control"
+										id="id"
+										value={userFirstName+" "+userLastName}
 										aria-describedby="id"
 										disabled
 									/>
@@ -80,54 +146,52 @@ const UpgradeMembershipComponent = () => {
 										type="text"
 										className="form-control"
 										id="exampleInputPassword1"
-										value={"SILVER"}
+										value={userMembership.membershipType}
 										disabled
 									/>
 								</div>
 								<div className=" form-group m-3 col-6 mx-auto  ">
 									<label className="form-label">Category</label>
-									<select className="form-select" id="category" onChange={selectHandler}>
+									<select className="form-select" id="category" value={chosenMembership} onChange={onMemberShipChooseHandler}>
 										<option value="" defaultValue disabled>
 											Select a Plan
 										</option>
-										<option value="REGULAR">Regular with 10% Discount</option>
-										<option value="SILVER">Silver with 15% Discount</option>
-										<option value="GOLD">Gold with 20% Discount</option>
-										<option value="DIAMOND">Diamond with 25% Discount</option>
-										<option value="PLATINUM">Platinum with 30% Discount</option>
+										{
+											membershipList.map((item,index)=>(
+											<option value={item.id} key={index}>
+												{item.membershipType} with {item.discount}% Discount
+											</option>))
+										}
 									</select>
 								</div>
 								<br />
-								<div className="m-3 col-6 mx-auto  ">
-									{/* <label htmlFor="exampleInputPassword2" className="form-label ">
-								You Agree To Pay
-							</label>
-							<input
-								type="number"
-								className="form-control"
-								id="exampleInputPassword2"
-								value={2000}
-								disabled
-							/> */}
-									<div class="input-group mb-3">
-										<span class="input-group-text text-muted" id="basic-addon1">
+								{
+									showPriceTier && <div className="m-3 col-6 mx-auto  ">
+									<div className="input-group mb-3">
+										<span className="input-group-text text-muted" id="basic-addon1">
 											You Agree To Pay ₹
 										</span>
 										<input
-											type="number"
-											class="form-control"
+											type="text"
+											className="form-control"
 											placeholder="Username"
 											aria-label="Username"
 											aria-describedby="basic-addon1"
-											value={2000}
+											value={membershipCost}
+											disabled
 										/>
 									</div>
 								</div>
-								<div className="text-center col-6 mx-auto m-5">
-									<button type="submit" className="btn btn-danger fs-4">
+								}
+								{
+									showPriceTier &&
+									<div className="text-center col-6 mx-auto m-5">
+									<button type="submit" className="btn btn-danger fs-4" onClick={onPayClickHandler}>
 										Proceed to Pay &nbsp; <FontAwesomeIcon icon={faCreditCard} />
 									</button>
 								</div>
+								}
+								
 							</form>
 						</div>
 					</div>
