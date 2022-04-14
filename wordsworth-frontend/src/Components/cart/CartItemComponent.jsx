@@ -38,7 +38,12 @@ const CartItemComponent = (props) => {
 				<div className="row g-0 d-flex flex-wrap align-items-center">
 					<div className="col-2 text-center py-4">
 					<NavLink to={`/books/${props.item.bookId}`}>
-							<img src={props.item.bookCover} alt="book cover" style={{ width: "6rem" }} />
+							<img src={props.item.bookCover} alt="book cover" style={{ width: "6rem" }}
+							onError={({ currentTarget }) => {
+								currentTarget.onerror = null; // prevents looping
+								currentTarget.src = "https://neelkanthpublishers.com/assets/bookcover.png";
+							}}
+							/>
 						</NavLink>
 					</div>
 					<div className="col-4 text-center ">

@@ -127,6 +127,7 @@ const Login = () => {
             }).catch((error) => {
 				window.alert("Invalid User Credentials");
                 console.log("found error", error);
+				alert("Login failed! Please check your credentials");
             })
         }
     }
