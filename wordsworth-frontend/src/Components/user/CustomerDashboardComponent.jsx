@@ -304,7 +304,7 @@ const CustomerDashboardComponent = () => {
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<div className="card mx-auto" style={{ width: "22rem" }}>
-							<img src={messi} className="card-img-top" alt="..." />
+							<img src={logo} className="card-img-top" alt="..." />
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
 									<h5 className="fw-light fs-4">
