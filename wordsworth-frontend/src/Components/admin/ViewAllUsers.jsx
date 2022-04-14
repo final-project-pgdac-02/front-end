@@ -77,58 +77,51 @@ const ViewAllUsers = () => {
     }
 
     return (
-        <>
-            {loggedInAdminOrNot && <Navigate to="/login"/>}
-            <div className="card" style={{ "margin": 70 }}>
-
-                <table className="table align-middle mb-0 bg-white table-striped">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">EMAIL</th>
-                            <th scope="col">PHONE</th>
-                            <th scope="col">ROLE</th>
-                            <th scope="col">ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {userList.map((value, key) => {
-
-                            return (
-                                <tr>
-                                    <td>
-                                        {value.id}
-                                    </td>
-                                    <td>
-                                        {value.firstName}
-                                    </td>
-                                    <td>
-                                        {value.email}
-                                    </td>
-                                    <td>
-                                        {value.phone}
-                                    </td>
-                                    <td>
-                                        {value.role}
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" onClick={() => showDeleteModal(value.id, value.role)}><FontAwesomeIcon icon={faTrash}  /></button>
-                                    </td>
-                                </tr>
-
-
-                            )
-
-                        })}
-
-                    </tbody>
-                </table>
-                <DeleteConfirmation showModal={displayConfirmationModal} confirmModal={onDeleteAUserClick} hideModal={hideConfirmationModal} UID={userId} />
-
-            </div>
-        </>
-
-    );
+		<>
+			{loggedInAdminOrNot && <Navigate to="/forbidden" />}
+			<div className="card" style={{ margin: 70 }}>
+				<table className="table align-middle mb-0 bg-white table-striped">
+					<thead className="thead-dark">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">NAME</th>
+							<th scope="col">EMAIL</th>
+							<th scope="col">PHONE</th>
+							<th scope="col">ROLE</th>
+							<th scope="col">ACTION</th>
+						</tr>
+					</thead>
+					<tbody>
+						{userList.map((value, key) => {
+							return (
+								<tr>
+									<td>{value.id}</td>
+									<td>{value.firstName}</td>
+									<td>{value.email}</td>
+									<td>{value.phone}</td>
+									<td>{value.role}</td>
+									<td>
+										<button
+											type="button"
+											class="btn btn-danger"
+											onClick={() => showDeleteModal(value.id, value.role)}
+										>
+											<FontAwesomeIcon icon={faTrash} />
+										</button>
+									</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+				<DeleteConfirmation
+					showModal={displayConfirmationModal}
+					confirmModal={onDeleteAUserClick}
+					hideModal={hideConfirmationModal}
+					UID={userId}
+				/>
+			</div>
+		</>
+	);
 }
 export default ViewAllUsers;

@@ -4,7 +4,7 @@ import { faBook, faUser, faClipboardUser } from '@fortawesome/free-solid-svg-ico
 import { faKey, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { ImBooks } from 'react-icons/im';
 import logo from "../../userprofile.png";
-import messi from "../../messi.jpg";
+// import messi from "../../messi.jpg";
 
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -227,7 +227,7 @@ const AdminDashboardComponent = () => {
 								Update Shipping Status &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
 						</div>
-						<div className="col-4">
+						<div className="col-4 mx-auto">
 							<div
 								className="p-3 border bg-light rounded"
 								onClick={handleShow}

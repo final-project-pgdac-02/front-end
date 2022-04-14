@@ -199,7 +199,7 @@ const AddBookComponent = () => {
 	return (
 		<div>
 			<>
-				{loggedInNotAsAdmin && <Navigate to="/login" />}
+				{loggedInNotAsAdmin && <Navigate to="/forbidden" />}
 				<div>
 					<br />
 					<br />

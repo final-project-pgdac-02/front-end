@@ -125,146 +125,145 @@ const UpdateBookDetails = (props) => {
     }
 
     return (
-        <div >
-            <>
-                {loggedInNotAsAdmin && <Navigate to="/login" />}
-                <div >
-                    <br />
-                    <br />
-                    <div className="card mx-auto shadow" style={{ width: "55%" }} data-aos="flip-down">
-                        <div className="row g-0 d-flex flex-wrap align-items-center">
-                            <div className="card-body">
-                                <h1 className="card-title display-4 text-center m-1 ">Add a New Book to Wordsworth</h1>
-                                <hr />
-                            </div>
-                            <form onSubmit={OnUpdateBookClick}>
-                                <div className=" col-7 mx-auto m-3 ">
-                                    <label htmlFor="bookTitle" className="form-label ">
-                                        Book Title
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="bookTitle"
-                                        aria-describedby="title"
-                                        placeholder="The Memoirs of Sherlock Holmes"
-                                        // onChange={titleTextHandler}
-                                        value={bookTitle}
-                                        disabled
-                                    />
-                                    {/* <span className="text-danger">{titleErr}</span> */}
-                                </div>
-                                <div className=" col-7 mx-auto m-3 ">
-                                    <label htmlFor="author" className="form-label ">
-                                        Book Author
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="author"
-                                        aria-describedby="author"
-                                        placeholder="Arthur Conan Doyle"
-                                        // onChange={AuthorTextHandler}
-                                        value={author}
-                                        disabled
-                                    />
-                                    {/* <span className="text-danger">{authorErr}</span> */}
-                                </div>
-                                <div className=" col-7 mx-auto m-3 ">
-                                    <label htmlFor="title" className="form-label ">
-                                        Publication
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="title"
-                                        aria-describedby="title"
-                                        placeholder="G. Newnes Ltd."
-                                        onChange={publicationHandler}
-                                        value={publication}
-                                    />
-                                    <span className="text-danger">{publicationErr}</span>
-                                </div>
-                                <div className=" form-group col-7 mx-auto m-3">
-                                    <label htmlFor="category" className="form-label">
-                                        Category
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-select"
-                                        id="category"
-                                        // onChange={categoryHandler}
-                                        value={category}
-                                        disabled
-                                    />
+		<div>
+			<>
+				{loggedInNotAsAdmin && <Navigate to="/forbidden" />}
+				<div>
+					<br />
+					<br />
+					<div className="card mx-auto shadow" style={{ width: "55%" }} data-aos="flip-down">
+						<div className="row g-0 d-flex flex-wrap align-items-center">
+							<div className="card-body">
+								<h1 className="card-title display-4 text-center m-1 ">Add a New Book to Wordsworth</h1>
+								<hr />
+							</div>
+							<form onSubmit={OnUpdateBookClick}>
+								<div className=" col-7 mx-auto m-3 ">
+									<label htmlFor="bookTitle" className="form-label ">
+										Book Title
+									</label>
+									<input
+										type="text"
+										className="form-control"
+										id="bookTitle"
+										aria-describedby="title"
+										placeholder="The Memoirs of Sherlock Holmes"
+										// onChange={titleTextHandler}
+										value={bookTitle}
+										disabled
+									/>
+									{/* <span className="text-danger">{titleErr}</span> */}
+								</div>
+								<div className=" col-7 mx-auto m-3 ">
+									<label htmlFor="author" className="form-label ">
+										Book Author
+									</label>
+									<input
+										type="text"
+										className="form-control"
+										id="author"
+										aria-describedby="author"
+										placeholder="Arthur Conan Doyle"
+										// onChange={AuthorTextHandler}
+										value={author}
+										disabled
+									/>
+									{/* <span className="text-danger">{authorErr}</span> */}
+								</div>
+								<div className=" col-7 mx-auto m-3 ">
+									<label htmlFor="title" className="form-label ">
+										Publication
+									</label>
+									<input
+										type="text"
+										className="form-control"
+										id="title"
+										aria-describedby="title"
+										placeholder="G. Newnes Ltd."
+										onChange={publicationHandler}
+										value={publication}
+									/>
+									<span className="text-danger">{publicationErr}</span>
+								</div>
+								<div className=" form-group col-7 mx-auto m-3">
+									<label htmlFor="category" className="form-label">
+										Category
+									</label>
+									<input
+										type="text"
+										className="form-select"
+										id="category"
+										// onChange={categoryHandler}
+										value={category}
+										disabled
+									/>
 
-                                    {/* <span className="text-danger">{categoryErr}</span> */}
-                                </div>
-                                <div className=" col-7 mx-auto m-3 ">
-                                    <label htmlFor="url" className="form-label ">
-                                        Book Cover URL
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="url"
-                                        aria-describedby="url"
-                                        placeholder="www.xyz.com"
-                                        onChange={bookCoverTextHandler}
-                                        value={bookCover}
-                                    />
-                                    <span className="text-danger">{bookCoverErr}</span>
-                                </div>
+									{/* <span className="text-danger">{categoryErr}</span> */}
+								</div>
+								<div className=" col-7 mx-auto m-3 ">
+									<label htmlFor="url" className="form-label ">
+										Book Cover URL
+									</label>
+									<input
+										type="text"
+										className="form-control"
+										id="url"
+										aria-describedby="url"
+										placeholder="www.xyz.com"
+										onChange={bookCoverTextHandler}
+										value={bookCover}
+									/>
+									<span className="text-danger">{bookCoverErr}</span>
+								</div>
 
-                                <div className=" col-7 mx-auto m-3 ">
-                                    <label htmlFor="isbn" className="form-label ">
-                                        ISBN
-                                    </label>
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        id="url"
-                                        aria-describedby="isbn"
-                                        placeholder="x x x x x x x x x x x x x x x x"
-                                        minLength={13}
-                                        maxLength={13}
-                                        onChange={isbnHandler}
-                                        value={isbn}
-                                    />
-                                    <span className="text-danger">{isbnErr}</span>
-                                </div>
+								<div className=" col-7 mx-auto m-3 ">
+									<label htmlFor="isbn" className="form-label ">
+										ISBN
+									</label>
+									<input
+										type="number"
+										className="form-control"
+										id="url"
+										aria-describedby="isbn"
+										placeholder="x x x x x x x x x x x x x x x x"
+										minLength={13}
+										maxLength={13}
+										onChange={isbnHandler}
+										value={isbn}
+									/>
+									<span className="text-danger">{isbnErr}</span>
+								</div>
 
-                                <div className="row col-7 mx-auto d-flex justify-content-between">
-
-                                    <div className="col-7 mx-auto m-3">
-                                        <label htmlFor="price" className="form-label">
-                                            Price
-                                        </label>
-                                        <input
-                                            type="number"
-                                            step={0.01}
-                                            min={1}
-                                            id="price"
-                                            className="form-control"
-                                            placeholder="₹  XXXX"
-                                            onChange={priceHandler}
-                                            value={price}
-                                        />
-                                        <span className="text-danger">{priceErr}</span>
-                                    </div>
-                                </div>
-                                <div className="text-center col-5 mx-auto m-5">
-                                    <button type="submit" className="btn btn-warning btn-lg fs-4">
-                                        Update This Book
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </>
-        </div>
-    );
+								<div className="row col-7 mx-auto d-flex justify-content-between">
+									<div className="col-7 mx-auto m-3">
+										<label htmlFor="price" className="form-label">
+											Price
+										</label>
+										<input
+											type="number"
+											step={0.01}
+											min={1}
+											id="price"
+											className="form-control"
+											placeholder="₹  XXXX"
+											onChange={priceHandler}
+											value={price}
+										/>
+										<span className="text-danger">{priceErr}</span>
+									</div>
+								</div>
+								<div className="text-center col-5 mx-auto m-5">
+									<button type="submit" className="btn btn-warning btn-lg fs-4">
+										Update This Book
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</>
+		</div>
+	);
 }
 
 export default UpdateBookDetails;

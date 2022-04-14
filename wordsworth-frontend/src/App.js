@@ -36,6 +36,7 @@ import CustomerDashboardComponent from './Components/user/CustomerDashboardCompo
 import AdminDashboardComponent from './Components/admin/AdminDashboardComponent';
 import UpgradeMembershipComponent from "./Components/user/UpgradeMembershipComponent";
 import UpdateOrderDetailStatusComponent from './Components/admin/UpdateOrderDetailStatusComponent';
+import ForbiddenAccess from './Components/errors/ForbiddenAccess';
 
 export const UserContext = createContext();
 
@@ -66,9 +67,8 @@ function App() {
 					<Routes>
 						<Route path="/" element={<BooksListComponent />} />
 						<Route path="/updateshippingstatus" exact element={<UpdateOrderDetailStatusComponent />} />
-						<Route path="/upgrademembership" element={<UpgradeMembershipComponent />} />
-
-						<Route path="/books/:id" element={<Book />} />
+						<Route path="/upgrademembership" exact element={<UpgradeMembershipComponent />} />
+						<Route path="/books/:id" exact element={<Book />} />
 						<Route path="/login" exact element={<Login />} />
 						<Route path="/admindashboard" exact element={<AdminDashboardComponent />} />
 						<Route path="/customerdashboard" exact element={<CustomerDashboardComponent />} />
@@ -89,9 +89,10 @@ function App() {
 						<Route path="/membership/discount/:id" exact element={<DiscountPercentComponent />} />
 						<Route path="/membership/cost/:id" exact element={<MembershipCostComponent />} />
 						<Route path="/search/:title" exact element={<Search />} />
-						<Route path="/order" element={<OrderFormComponent />} />
-						<Route path="/advancedsearchresult" element={<AdvancedSearchResultComponent />} />
-						<Route path="/orderhistory" element={<OrderHistoryComponent />} />
+						<Route path="/order" exact element={<OrderFormComponent />} />
+						<Route path="/advancedsearchresult" exact element={<AdvancedSearchResultComponent />} />
+						<Route path="/orderhistory" exact element={<OrderHistoryComponent />} />
+                        <Route path='/forbidden' exact element={<ForbiddenAccess/>}/>
 						<Route path="*" exact element={<NotFound />} />
 					</Routes>
 				</UserContext.Provider>
