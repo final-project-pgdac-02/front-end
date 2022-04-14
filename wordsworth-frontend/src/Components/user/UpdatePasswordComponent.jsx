@@ -19,7 +19,8 @@ const UpdatePasswordComponent = () => {
 	const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
 	const [oldPasswordErr, setOldPasswordErr] = useState("");
-	const [newPasswordErr, setNewPasswordErr] = useState("");
+	const [newPasswordErr1, setNewPasswordErr1] = useState("");
+	const [newPasswordErr2,setNewPasswordErr2] = useState("");
 	const [confirmNewPasswordErr, setConfirmNewPasswordErr] = useState("");
 
 	let id = window.sessionStorage.getItem("sessionObjectId");
@@ -41,15 +42,18 @@ const UpdatePasswordComponent = () => {
 		if (oldPasswordErr !== null || oldPasswordErr !== "") {
 			setOldPasswordErr("");
 		}
-		console.log(oldPassword);
+		// console.log(oldPassword);
 	};
 
 	let newPasswordTextHandler = (event) => {
 		setNewPassword(event.target.value);
-		if (newPasswordErr !== null || newPasswordErr !== "") {
-			setNewPasswordErr("");
+		if (newPasswordErr1 !== null || newPasswordErr1 !== "") {
+			setNewPasswordErr1("");
 		}
-		console.log(newPassword);
+		if (newPasswordErr2 !== null || newPasswordErr2 !== ""){
+			setNewPasswordErr2("");
+		}
+		// console.log(newPassword);
 	};
 
 	let confirmNewPasswordTextHandler = (event) => {
@@ -57,11 +61,12 @@ const UpdatePasswordComponent = () => {
 		if (confirmNewPasswordErr !== null || confirmNewPasswordErr !== null) {
 			setConfirmNewPasswordErr("");
 		}
-		console.log(confirmNewPassword);
+		// console.log(confirmNewPassword);
 	};
 
 	let validation = () => {
 		let flag = true;
+		let passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*+-])([a-zA-Z0-9!@#$%^&*+-]{8,20})$/;
 
 		if (oldPassword === null || oldPassword === "") {
 			setOldPasswordErr("This Field is Mandatory");
@@ -69,8 +74,14 @@ const UpdatePasswordComponent = () => {
 		}
 
 		if (newPassword === null || newPassword === "") {
-			setNewPasswordErr("This Field Is mandatory");
+			setNewPasswordErr1("This Field Is mandatory");
 			flag = false;
+		}else if(!passwordRegex.test(newPassword)){
+			setNewPasswordErr1("There must be atleast one number,one special character,spaces not allowed & password length must be between 8-20 character")
+			flag = false;
+		}else{
+			setNewPasswordErr2("Valid Password");
+			flag = true;
 		}
 
 		if (confirmNewPassword === null || confirmNewPassword === "") {
@@ -101,7 +112,8 @@ const UpdatePasswordComponent = () => {
 
 		if (validation()) {
 			setOldPasswordErr("");
-			setNewPasswordErr("");
+			setNewPasswordErr1("");
+			setNewPasswordErr2("");
 			setConfirmNewPasswordErr("");
 
 			let passwordObject = { "id":userId, oldPassword, newPassword };
@@ -170,7 +182,8 @@ const UpdatePasswordComponent = () => {
 									onChange={newPasswordTextHandler}
 									value={newPassword}
 								/>
-								<span className="text-danger">{newPasswordErr}</span>
+								<span className="text-danger">{newPasswordErr1}</span>
+								<span className="text-success">{newPasswordErr2}</span>
 							</div>
 							<div className="m-3 col-6 mx-auto  ">
 								<label for="exampleInputPassword2" className="form-label ">
