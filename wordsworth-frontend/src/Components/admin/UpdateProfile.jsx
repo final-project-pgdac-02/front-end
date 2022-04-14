@@ -165,6 +165,7 @@ function UpdateProfile() {
                                 className="form-control"
                                 id="phn"
                                 placeholder="9797979797"
+                                pattern="[0-9]{10}"
                                 onChange={phoneNumberTextHandler}
                                 value={phoneNumber}
                             />
