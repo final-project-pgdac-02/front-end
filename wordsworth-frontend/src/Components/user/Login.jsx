@@ -62,18 +62,25 @@ const Login = () => {
 
     let emailTextHandler = (event) => {
         setEmail(event.target.value);
-        console.log(email);
+		if(emailErr !== null || emailErr !== ""){
+			setEmailErr("");
+		}
+        // console.log(email);
     }
 
     let passwordTextHandler = (event) => {
         setPassword(event.target.value);
-        console.log(password);
+		if(passwordErr !== null || passwordErr !== ""){
+			setPasswordErr("");
+		}
+        // console.log(password);
     }
 
     let validation = () => {
 
         let emailFlag = true;
         let passwordFlag = true;
+		
 
         if (email === null || email === "") {
             setEmailErr("This field is mandatory");
@@ -109,21 +116,16 @@ const Login = () => {
 
 				if (response.data.role === "CUSTOMER") {
 					console.log(response.data.role);
-					// window.alert("Welcome " + response.data.firstName + ", You LoggedIn Successfully!!!");
 					dispatch({ type: "USER", payload: "user" });
 					setLoginAsUser(true);
-
-					//dispatch({type:"ADMIN",payload:""});
 				}
 				else if (response.data.role === "ADMIN") {
 					console.log(response.data.role);
-					// window.alert("Welcome " + response.data.firstName + ", You LoggedIn Successfully!!!");
-					//dispatch({type:"USER",payload:""});
 					dispatch({ type: "ADMIN", payload: "admin" });
 					setLoggedInAsAdmin(true);
-					// navigate("/userdashboard");
 				}
             }).catch((error) => {
+				window.alert("Invalid User Credentials");
                 console.log("found error", error);
 				alert("Login failed! Please check your credentials");
             })
@@ -139,7 +141,6 @@ const Login = () => {
 			<br />
 			<div className="m-3" style={{ display: "flex" }}>
 				<div className="card p-2 col-3 mx-auto shadow" style={{ display: "block" }}>
-					{/* <img src={logo} className="card-img-top img-fluid" alt="w_logo" /> */}
 					<div className="text-center">
 						<WSvgComponent {...svgprops} />
 					</div>
