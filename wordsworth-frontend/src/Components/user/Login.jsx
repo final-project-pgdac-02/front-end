@@ -103,7 +103,7 @@ const Login = () => {
             setPasswordErr("");
             let loginRequest = { email, password };
             UserService.processLoginForm(loginRequest).then((response) => {
-                console.log("login successfull", response.data);
+                console.log("login successful", response.data);
                 window.sessionStorage.setItem("sessionObjectId", response.data.id);
                 window.sessionStorage.setItem("sessionObjectFirstName", response.data.firstName);
 				window.sessionStorage.setItem("sessionObjectLastName",response.data.lastName);
@@ -188,8 +188,8 @@ const Login = () => {
 						</form>
 					</div>
 				</div>
-				<div className={show} id="snackbar">LogOut Successfull</div>
-				<div className={show1} id="snackbar">User Registered Successfull</div>
+				<div className={show} id="snackbar">Logout Successful</div>
+				<div className={show1} id="snackbar">User Registered Successfully</div>
 			</div>
 		</>
 	);

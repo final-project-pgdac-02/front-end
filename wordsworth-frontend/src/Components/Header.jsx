@@ -42,6 +42,7 @@ const Header = () => {
 		if (searchString) {
 			// setSearch(true);
 			navigate(`/search/${searchString}`);
+			setSearchString("");
 		}
 	}
 

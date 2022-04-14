@@ -31,7 +31,7 @@ const ViewAllBooks = () => {
 
     return (
         <>
-            <div className="card" style={{ "margin": 50 }}>
+            <div className="card" style={{ "margin": 50, "marginLeft" :150, "marginRight": 150 }}>
                 <table className="table align-middle mb-0 bg-white table-striped">
                     <thead className="thead-dark">
                         <tr>
@@ -68,8 +68,9 @@ const ViewAllBooks = () => {
                                         {value.price}
                                     </td>
                                     <td>
-                                        <button type="button" className="btn btn-primary" onClick={() => { UpdateStock(value.id) }}>Update Stock</button>&nbsp;
-                                        <button type="button" className="btn btn-primary" onClick={() => { UpdateBook(value.id) }} >Update Details</button>
+                                        <button type="button" className="btn btn-success mx-2" onClick={() => { UpdateStock(value.id) }}>Update Stock</button>
+                                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button type="button" className="btn btn-danger" onClick={() => { UpdateBook(value.id) }} >Update Details</button>
                                     </td>
                                 </tr>
                             )

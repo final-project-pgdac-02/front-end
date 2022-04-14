@@ -75,7 +75,7 @@ const BooksListComponent = () => {
 					</Col>
 				))} */}
 			</Row>
-			<div className={show} id="snackbar">LogIn Successfull</div>
+			<div className={show} id="snackbar">Login Successful</div>
 
 		</div>
 	);
