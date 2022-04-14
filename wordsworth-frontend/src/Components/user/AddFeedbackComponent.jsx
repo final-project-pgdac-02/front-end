@@ -21,15 +21,19 @@ const AddFeedbackComponent = (props) => {
 	const [reviewerNameErr, setReviewerNameErr] = useState("");
 	const [reviewErr, setReviewErr] = useState("");
 	const [ratingErr, setRatingErr] = useState("");
-	const [notLoggedIn, setNotLoggedIn] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(false);
 
 	const getUserId = window.sessionStorage.getItem("sessionObjectId");
-	useEffect(() => {
-		if (getUserId === null) {
-			alert("You need to login to add feedback!");
-			setNotLoggedIn(true);
-		}
-	}, []);
+
+	useEffect(()=>{
+        if(getUserId === null){
+            setLoggedIn(true);
+            window.alert("Please Log in first!!!");
+        }
+        else{
+
+        }
+    },[])
 
 	useEffect(() => {
 		BookService.getBookDetails(bookId.id).then(response => {
@@ -109,7 +113,8 @@ const AddFeedbackComponent = (props) => {
 
 	return (
 		<>
-			{notLoggedIn && <Navigate to="/login" />}
+			{loggedIn && <Navigate to="/login" />}
+			
 			{/* {addFeedbackDone && <Navigate to={"/books/" + bookId.id} />} */}
 			<div>
 				<br />

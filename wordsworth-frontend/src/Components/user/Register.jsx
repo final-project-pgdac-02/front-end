@@ -28,37 +28,58 @@ const Register = () => {
 
 	let firstNameTextHandler = (event) => {
 		setFirstName(event.target.value);
-		console.log(firstName);
+		if(firstNameErr !== null || firstNameErr !== ""){
+			setFirstNameErr("");
+		}
+		// console.log(firstName);
 	};
 
 	let lastNameTextHandler = (event) => {
 		setLastName(event.target.value);
-		console.log(lastName);
+		if(lastrNameErr !== null || lastrNameErr !== ""){
+			setLastNameErr("");
+		}
+		// console.log(lastName);
 	};
 
 	let emailTextHandler = (event) => {
 		setEmail(event.target.value);
-		console.log(email);
+		if(emailErr !== null || emailErr !== ""){
+			setEmailErr("");
+		}
+		// console.log(email);
 	};
 
 	let confirmEmailTextHandler = (event) => {
 		setConfirmEmail(event.target.value);
-		console.log(confirmEmail);
+		if(confirmEmailErr !== null || confirmEmailErr !== ""){
+			setConfirmEmailErr("");
+		}
+		// console.log(confirmEmail);
 	};
 
 	let passwordTextHandler = (event) => {
 		setPassword(event.target.value);
-		console.log(password);
+		if(passwordErr !== null || passwordErr !== ""){
+			setPasswordErr("");
+		}
+		// console.log(password);
 	};
 
 	let confirmPasswordTextHandler = (event) => {
 		setConfirmPassword(event.target.value);
-		console.log(confirmEmail);
+		if(confirmPasswordErr !== null || confirmPasswordErr !== ""){
+			setConfirmPasswordErr("");
+		}
+		// console.log(confirmEmail);
 	};
 
 	let phoneNumberTextHandler = (event) => {
 		setPhoneNumber(event.target.value);
-		console.log(phoneNumber);
+		if(phoneNumberErr !== null || phoneNumberErr !== ""){
+			setPhoneNumberErr("");
+		}
+		// console.log(phoneNumber);
 	};
 
 	let validation = () => {

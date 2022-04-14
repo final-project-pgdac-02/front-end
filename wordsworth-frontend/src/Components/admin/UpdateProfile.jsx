@@ -94,7 +94,7 @@ function UpdateProfile() {
             AdminService.updateProfile(id, userObject).then(response => {
                 console.log("Profile Updated Successfully!!", response.data);
                 window.alert("Profile Updated Successfully!!", response.data);
-                navigate("/userdashboard");
+                navigate("/admindashboard");
             }).catch(error => {
                 window.alert("Something went wrong", error);
             });
@@ -103,6 +103,8 @@ function UpdateProfile() {
     return (
         <>
             {notLoggedIn && <Navigate to="/login" />}
+            <br />
+            <br />
             <div className="card mx-auto shadow" style={{ width: "45%" }}>
                 <div className="row g-0 d-flex flex-wrap align-items-center">
 
@@ -184,10 +186,8 @@ function UpdateProfile() {
                         </div>
 
                         <div className="text-center col-5 mx-auto m-5">
-                            <button type="submit" className="btn btn-warning btn-lg">
-                                <h5 className="fs-3 fw-light">
+                            <button type="submit" className="btn btn-warning btn-lg fs-3 fw-light">
                                     Update Profile
-                                </h5>
                             </button>
                         </div>
                     </form>

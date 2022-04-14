@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faBookBookmark } from "@fortawesome/free-solid-svg-icons";
 import AdminService from "../../service/AdminService";
 
 const AddBookComponent = () => {
+	let navigate = useNavigate();
 	const [loggedInNotAsAdmin, setLoggedInNotAsAdmin] = useState(false);
 	const role = window.sessionStorage.getItem("sessionObjectRole");
 	useEffect(() => {
@@ -17,7 +18,6 @@ const AddBookComponent = () => {
 		}
 	}, []);
 
-	const [bookAdded, setBookAdded] = useState(false);
 	const [hover, setHover] = useState(0);
 
 	const [title, setTitle] = useState("");
@@ -35,6 +35,7 @@ const AddBookComponent = () => {
 	const [publicationErr, setPublicationErr] = useState("");
 	const [categoryErr, setCategoryErr] = useState("");
 	const [stockErr, setStockErr] = useState("");
+	const [bookCoverErr,setBookCoverErr] = useState("");
 	const [averageRatingErr, setAverageRatingErr] = useState("");
 	const [priceErr, setPriceErr] = useState("");
 	const [isbnErr, setIsbnErr] = useState("");
@@ -73,6 +74,9 @@ const AddBookComponent = () => {
 
 	let bookCoverTextHandler = (event) => {
 		setBookCover(event.target.value);
+		if(bookCoverErr !== null || bookCoverErr !== ""){
+			setBookCoverErr("");
+		}
 		// console.log(bookCover);
 	};
 
@@ -89,7 +93,7 @@ const AddBookComponent = () => {
 		if (averageRatingErr !== null || averageRatingErr !== "" || averageRatingErr !== 0) {
 			setAverageRatingErr("");
 		}
-		console.log(averageRating);
+		// console.log(averageRating);
 	};
 
 	let priceTextHandler = (event) => {
@@ -161,6 +165,7 @@ const AddBookComponent = () => {
 			setPublicationErr("");
 			setCategoryErr("");
 			setStockErr("");
+			setBookCoverErr("");
 			setAverageRatingErr("");
 			setPriceErr("");
 			setIsbnErr("");
@@ -183,7 +188,7 @@ const AddBookComponent = () => {
 					console.log("Book Added Successfully!", resp.data);
 					window.alert("Book Added Successfully!", resp.data);
 					// dispatch({ type: "ADMIN", payload: "admin" });
-					setBookAdded(true);
+					navigate("/");
 				})
 				.catch((err) => {
 					console.log("Something Went Wrong, Please Enter Book Details Again !!");
@@ -194,7 +199,6 @@ const AddBookComponent = () => {
 	return (
 		<div>
 			<>
-				{bookAdded && <Navigate to="/" />}
 				{loggedInNotAsAdmin && <Navigate to="/login" />}
 				<div>
 					<br />
@@ -296,6 +300,7 @@ const AddBookComponent = () => {
 										onChange={bookCoverTextHandler}
 										value={bookCover}
 									/>
+									<span className="text-danger">{bookCoverErr}</span>
 								</div>
 
 								<div className=" col-7 mx-auto m-3 ">
