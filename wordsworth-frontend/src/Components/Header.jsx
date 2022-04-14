@@ -10,7 +10,7 @@ import AdvancedSearchComponent from "./AdvancedSearchComponent";
 
 const Header = () => {
 	let svgprops = {
-		opacity: "0.7",
+		opacity: "0.6",
 		width: "200",
 	};
 
@@ -193,7 +193,7 @@ const Header = () => {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="mx-auto">
+					<Nav className="mx-auto align-items-center">
 						<NavLink to="/" className="mx-3 text-decoration-none text-muted">
 							{/* <Button variant="light fs-4 text-muted rounded-circle"> */}
 							<FontAwesomeIcon icon={faHouse} className="mx-auto fs-4" />

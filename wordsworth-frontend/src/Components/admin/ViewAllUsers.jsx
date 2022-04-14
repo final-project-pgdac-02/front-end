@@ -98,7 +98,7 @@ const ViewAllUsers = () => {
                             return (
                                 <tr>
                                     <td>
-                                        {key + 1}
+                                        {value.id}
                                     </td>
                                     <td>
                                         {value.firstName}

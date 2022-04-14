@@ -78,6 +78,10 @@ const BookDetailsComponent = (props) => {
 					<img
 						// src="https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/7/30/1406719196162/b57b6007-afb1-4e3c-8263-b29f6534aee8-1360x2040.jpeg?width=1010&quality=45&auto=format&fit=max&dpr=2&s=8a635c36538c519c575eb3b262c90e7e"
 						src={props.book.bookCover}
+						onError={({ currentTarget }) => {
+							currentTarget.onerror = null; // prevents looping
+							currentTarget.src = "https://neelkanthpublishers.com/assets/bookcover.png";
+						}}
 						className="img-fluid rounded p-4"
 						alt="book cover"
 					/>

@@ -35,6 +35,10 @@ const OrderDetailComponent = (props) => {
                         alt={props.item.bookTitle}
                         style={{ width: "175px", height: "250px", padding:"10px" }}
                         onClick={()=>{navigate(bookLink); console.log(bookLink)}}
+                        onError={({ currentTarget }) => {
+							currentTarget.onerror = null; // prevents looping
+							currentTarget.src = "https://neelkanthpublishers.com/assets/bookcover.png";
+						}}
                     />
                 </div>
                 <div className="col-md-8 p-2">

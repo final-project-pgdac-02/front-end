@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import AddCardComponent from "../user/AddCardComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import CardComponent from "./CardComponent";
 
 const CardListCoponent = (props) => {
@@ -18,15 +20,14 @@ const CardListCoponent = (props) => {
 
 	const getCardList = async () => {
 		console.log(userId);
-		const res = await axios.get(`http://localhost:8080/user/getcards/${userId}`)
+		const res = await axios.get(`http://localhost:8080/user/getcards/${userId}`);
 		setCardList(res.data);
 		setLoading(true);
-	}
+	};
 
-	const onAddCardHandler=()=>{
-		navigate("/addacard")
-	}
-
+	const onAddCardHandler = () => {
+		navigate("/addacard");
+	};
 
 	const getSelectedCard = (value) => {
 		console.log(value + " In parent card");
@@ -35,19 +36,20 @@ const CardListCoponent = (props) => {
 
 	return (
 		<div className="card m-5 mx-auto border-0" style={{ width: "70%" }}>
-			{
-				loading && cardList.length===0 && <div> <p class="text-danger" style={{ fontSize: '25px'}}>
-				You don't have any saved cards..
-			</p>
-				{/* <Link to="/addacard" style={{ color: 'mediumorchid', fontSize: '25px', backgroundColor: 'lightcyan'}}>Add A Card</Link> */}
-				<Button size="lg" onClick={onAddCardHandler} variant="outline-info">Add a Card</Button>
-			</div>
-			}
-			{loading && cardList.map((card, i) =>
-				<CardComponent card={card} key={i} selectedCard={getSelectedCard} />
+			{loading && cardList.length === 0 && (
+				<div className="text-center">
+					<p class="text-danger display-6">
+						<FontAwesomeIcon icon={faTriangleExclamation} className="m-2" /> <br />
+						You don't have any saved cards!
+					</p>
+					{/* <Link to="/addacard" style={{ color: 'mediumorchid', fontSize: '25px', backgroundColor: 'lightcyan'}}>Add A Card</Link> */}
+					<br />
+					<Button size="lg" onClick={onAddCardHandler} variant="outline-info">
+						Add a Card
+					</Button>
+				</div>
 			)}
-
-
+			{loading && cardList.map((card, i) => <CardComponent card={card} key={i} selectedCard={getSelectedCard} />)}
 		</div>
 	);
 };
