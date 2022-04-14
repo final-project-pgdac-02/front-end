@@ -27,7 +27,7 @@ background-size: 45px 45px,
 22.5px 22.5px;
 } */
 
-body{
+/* body{
     background-color: #fcbb98;
     opacity: 1;
     background:  radial-gradient(circle, transparent 20%, #fcbb98 20%, #fcbb98 80%, transparent 80%, transparent),
@@ -38,7 +38,7 @@ body{
     45px 45px,
     22.5px 22.5px,
     22.5px 22.5px;
-}
+} */
 
 .error-template {padding: 40px 15px;text-align: center;}
 .error-actions {margin-top:15px;margin-bottom:15px;}

@@ -45,6 +45,8 @@ const AdvancedSearchResultComponent = () => {
                         ?<InfoTextComponent text={notFoundText} />
                         :<InfoTextComponent foundResults={filteredBookList.length} text={foundText} />
                 }
+                </Row>
+                <Row>
                 {
                     loading && filteredBookList.length!==0 && filteredBookList.map((book, i) => (
                         <Col key={i}>

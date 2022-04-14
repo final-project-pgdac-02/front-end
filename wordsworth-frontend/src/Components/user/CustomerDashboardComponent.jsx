@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faUser, faClipboardUser } from '@fortawesome/free-solid-svg-icons'
-import { faKey, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faKey, faRightFromBracket, faPersonWalkingDashedLineArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ImBooks } from 'react-icons/im';
 import logo from "../../userprofile.png";
 import messi from "../../messi.jpg";
@@ -233,110 +233,135 @@ const CustomerDashboardComponent = () => {
     // }
 
     return (
-        <>
-            {loginFalse && <Navigate to="/login" />}
-            {logout && <Navigate to="/login" />}
-            {updatePassword && <Navigate to="/changepassword" />}
-            {addAddress && <Navigate to="/addanaddress" />}
-            {addCard && <Navigate to="/addacard" />}
-            {/* {addBook && <Navigate to="/addNewBook" />} */}
-            {/* {viewProfile && <Navigate to="/"/>} */}
-            <br />
-            <br />
+		<>
+			{loginFalse && <Navigate to="/login" />}
+			{logout && <Navigate to="/login" />}
+			{updatePassword && <Navigate to="/changepassword" />}
+			{addAddress && <Navigate to="/addanaddress" />}
+			{addCard && <Navigate to="/addacard" />}
+			{/* {addBook && <Navigate to="/addNewBook" />} */}
+			{/* {viewProfile && <Navigate to="/"/>} */}
+			<br />
+			<br />
 
+			<div className="card mx-auto shadow" style={{ width: "75%" }}>
+				<div className="row g-0 d-flex flex-wrap align-items-center">
+					<div className="col">
+						<img src={logo} className="p-3 d-block mx-auto" alt="book cover" style={{ width: "16%" }} />
+					</div>
+				</div>
+				<div className="row g-0">
+					<h1 className="display-5 p-4 text-center text-muted">Welcome Customer, {userObject2}</h1>
+				</div>
 
+				<div className="row g-1 container" style={{ "margin-left": "16.5rem" }}>
+					<div style={{ "margin-left": "10rem" }} className="m-2 col-3">
+						<Card border="info" style={{ width: "18rem" }} className="border-2">
+							<Card.Body>
+								<Card.Title className="lead fs-4 text-center">Total Orders</Card.Title>
+								<Card.Text className="text-center fs-4 lead">
+									{/* {allUsers.length} */}
+									{orderListOfUser.length}
+								</Card.Text>
+							</Card.Body>
+						</Card>
+					</div>
 
+					<div style={{ "margin-left": "10rem" }} className="m-2 col-3">
+						<Card border="danger" style={{ width: "18rem" }} className="border-2">
+							<Card.Body>
+								<Card.Title className="lead fs-4 text-center">Total Amount Spent</Card.Title>
+								<Card.Text className="text-center fs-4 lead">
+									{/* {allBooks.length} */}
+									{/* {totalOrderDetails.} */}
+									{Math.round(tSum)}
+								</Card.Text>
+							</Card.Body>
+						</Card>
+					</div>
+				</div>
 
-            <div className="card mx-auto shadow" style={{ width: "75%" }}>
-
-                <div className="row g-0 d-flex flex-wrap align-items-center">
-
-                    <div className="col">
-                        <img src={logo} className="p-3 d-block mx-auto" alt="book cover" style={{ width: "16%" }} />
-                    </div>
-                </div>
-                <div className="row g-0">
-                    <h1 className="display-5 p-4 text-center text-muted">Welcome Customer, {userObject2}</h1>
-                </div>
-
-
-                <div className="row g-1 container" style={{ "margin-left": '16.5rem' }}>
-
-                    <div style={{ "margin-left": '10rem' }} className="m-2 col-3">
-                        <Card border="info" style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title style={{ "text-align": 'center', fontFamily: 'fantasy' }}>Total Order</Card.Title>
-                                <Card.Text style={{ "text-align": 'center' }}>
-                                    {/* {allUsers.length} */}
-                                    {orderListOfUser.length}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-                    <div style={{ "margin-left": '10rem' }} className="m-2 col-3">
-                        <Card border="danger" style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title style={{ "text-align": 'center', fontFamily: 'fantasy' }}>Total Amount Spend</Card.Title>
-                                <Card.Text style={{ "text-align": 'center' }}>
-                                    {/* {allBooks.length} */}
-                                    {/* {totalOrderDetails.} */}
-                                    {Math.round(tSum)}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-                </div>
-
-                <br></br>
-                <div className="container">
-                    <div className="row g-2">
-                        <div className="col-4">
-                            <div className="p-3 border bg-light" onClick={addAnAddressClick} style={{ textAlign: 'center' }}>
-                                Add an Address &nbsp; <FontAwesomeIcon icon={faBook} />
-                            </div>
-                        </div>
-                        <div className="col-4">
-                            <div className="p-3 border bg-light" onClick={updatePasswordClick} style={{ textAlign: 'center' }}>
-                                Change Password &nbsp; <FontAwesomeIcon icon={faKey} />
-                            </div>
-                        </div>
-                        <div className="col-4">
-                            <div className="p-3 border bg-light" onClick={addACardClick} style={{ textAlign: 'center' }}>
-                                Add a Card &nbsp; <FontAwesomeIcon icon={faUser} />
-                            </div>
-                        </div>
-                        {/* <div className="col-4">
+				<br></br>
+				<div className="container fs-5 text-muted">
+					<div className="row g-4 m-3">
+						<div className="col-4">
+							<div
+								className="p-3 border bg-light rounded"
+								onClick={addAnAddressClick}
+								style={{ textAlign: "center" }}
+							>
+								Add an Address &nbsp; <FontAwesomeIcon icon={faBook} />
+							</div>
+						</div>
+						<div className="col-4">
+							<div
+								className="p-3 border bg-light rounded"
+								onClick={updatePasswordClick}
+								style={{ textAlign: "center" }}
+							>
+								Change Password &nbsp; <FontAwesomeIcon icon={faKey} />
+							</div>
+						</div>
+						<div className="col-4">
+							<div
+								className="p-3 border bg-light rounded"
+								onClick={addACardClick}
+								style={{ textAlign: "center" }}
+							>
+								Add a Card &nbsp; <FontAwesomeIcon icon={faUser} />
+							</div>
+						</div>
+						{/* <div className="col-4">
                             <div className="p-3 border bg-light" data-aos={animationZoomIn4} onMouseOver={mouseOverAnimation4} onClick={onViewAllBooksClick} style={{ textAlign: 'center' }}>
                                 View All Books &nbsp; < ImBooks />
                             </div>
-                        </div>
-                        <div className="col-4">
-                            <div className="p-3 border bg-light" data-aos={animationZoomIn5} onMouseOver={mouseOverAnimation5} onClick={UpgradeMembershipClick} style={{ textAlign: 'center' }}>
-                                Upgrade Membership &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
-                            </div>
-                        </div> */}
-                        <div className="col-4">
-                            <div className="p-3 border bg-light" onClick={handleShow} style={{ textAlign: 'center' }}>
-                                View Profile &nbsp; <FontAwesomeIcon icon={faUser} />
-                            </div>
-                        </div>
-                        <div className="col-4" style={{ "margin-left": '33.35%' }}>
-                            <div className="p-3 border bg-light" onClick={LogoutClick} style={{ textAlign: 'center' }}>
-                                Logout &nbsp; <FontAwesomeIcon icon={faRightFromBracket} />
-                            </div>
-                            <br />
-                        </div>
+                        </div>*/}
+						<div className="col-4">
+							<div
+								className="p-3 border bg-light text-center rounded"
+								// data-aos={animationZoomIn5}
+								// onMouseOver={mouseOverAnimation5}
+								// onClick={UpgradeMembershipClick}
+								// style={{ textAlign: "center" }}
+							>
+								Upgrade Membership &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
+							</div>
+						</div>
+						<div className="col-4">
+							<div
+								className="p-3 border bg-light rounded"
+								onClick={handleShow}
+								style={{ textAlign: "center" }}
+							>
+								View Profile &nbsp; <FontAwesomeIcon icon={faUser} />
+							</div>
+						</div>
+						<div className="col-4">
+							<div
+								className="p-3 border bg-light rounded"
+								onClick={LogoutClick}
+								style={{ textAlign: "center" }}
+							>
+								Logout &nbsp; <FontAwesomeIcon icon={faRightFromBracket} />
+							</div>
+						</div>
+						<div className="col-4" style={{ "margin-left": "33.35%" }}>
+							<div
+								className="p-3 border bg-light rounded text-danger"
+								onClick={LogoutClick}
+								style={{ textAlign: "center" }}
+							>
+								Deregister Me &nbsp; <FontAwesomeIcon icon={faPersonWalkingDashedLineArrowRight} />
+							</div>
+							<br />
+						</div>
+					</div>
+				</div>
+			</div>
 
-                    </div>
-                </div>
-            </div>
+			{/* chnages now */}
 
-            {/* chnages now */}
-
-
-            {/* 
+			{/* 
 			<div className="card mx-auto shadow" style={{ width: "75%" }}>
 				<div className="row g-0 d-flex flex-wrap align-items-center">
 
@@ -440,38 +465,52 @@ const CustomerDashboardComponent = () => {
 						</button>
 					</div> */}
 
-            {/* </div> */}
-            {/* </div> */}
+			{/* </div> */}
+			{/* </div> */}
 
-            <div className={show1} id="snackbar">LogIn Successfull</div>
-            <div>
-                <Offcanvas show={show} onHide={handleClose}>
-                    <Offcanvas.Header closeButton>
-                        <Offcanvas.Title></Offcanvas.Title>
-                    </Offcanvas.Header>
-                    <Offcanvas.Body>
-                        <div className="card" style={{ width: "22rem" }}>
-                            <img src={messi} className="card-img-top" alt="..." />
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">
-                                    <h5><strong>NAME : </strong>{userObject2}&nbsp;{userObject5}</h5>
-                                </li>
-                                <li className="list-group-item">
-                                    <h5><strong>E-MAIL : </strong>{userObject3}</h5>
-                                </li>
-                                <li className="list-group-item">
-                                    <h5><strong>ROLE : </strong>{userObject4}</h5>
-                                </li>
-                                <li className="list-group-item" style={{ "textAlign": 'center' }}>
-                                    <button className="btn btn-primary" type="button" onClick={onUpdateUserProfileClick}>Update Profile</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </Offcanvas.Body>
-                </Offcanvas>
-            </div>
-        </>
-    );
+			<div className={show1} id="snackbar">
+				LogIn Successfull
+			</div>
+			<div>
+				<Offcanvas show={show} onHide={handleClose}>
+					<Offcanvas.Header closeButton>
+						<Offcanvas.Title></Offcanvas.Title>
+					</Offcanvas.Header>
+					<Offcanvas.Body>
+						<div className="card mx-auto" style={{ width: "22rem" }}>
+							<img src={messi} className="card-img-top" alt="..." />
+							<ul className="list-group list-group-flush">
+								<li className="list-group-item">
+									<h5 className="fw-light fs-4">
+										NAME : &nbsp;
+										{userObject2}&nbsp;{userObject5}
+									</h5>
+								</li>
+								<li className="list-group-item">
+									<h5 className="fw-light fs-4">E-MAIL : &nbsp;{userObject3}</h5>
+								</li>
+								{/* <li className="list-group-item">
+									<h5>
+										<strong>ROLE : </strong>
+										{userObject4}
+									</h5>
+								</li> */}
+								<li className="list-group-item" style={{ textAlign: "center" }}>
+									<button
+										className="btn btn-primary m-2 fs-4"
+										type="button"
+										onClick={onUpdateUserProfileClick}
+									>
+										Update Profile
+									</button>
+								</li>
+							</ul>
+						</div>
+					</Offcanvas.Body>
+				</Offcanvas>
+			</div>
+		</>
+	);
 }
 
 

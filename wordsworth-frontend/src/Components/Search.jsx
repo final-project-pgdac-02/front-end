@@ -39,6 +39,8 @@ const Search = () => {
                         ?<InfoTextComponent text={notFoundText} title={title} />
                         :<InfoTextComponent text={foundText} title={title}/>
                 }
+                </Row>
+                <Row>
                 {
                     loading && matchingBookList.length!==0 && matchingBookList.map((book, i) => (
                         <Col key={i}>

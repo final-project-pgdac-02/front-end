@@ -71,7 +71,7 @@ const AdvancedSearchComponent = () => {
 			<div ref={ref}>
 				<FontAwesomeIcon
 					icon={faSearchengin}
-					className="mx-auto fs-2 text-decoration-none text-muted"
+					className="mx-auto fs-3 text-decoration-none text-muted"
 					onClick={handleClick}
 				/>
 				<Overlay show={show} target={target} placement="bottom" container={ref}>
