@@ -76,6 +76,8 @@ const UpdateOrderDetailStatusComponent = () => {
 								id="oid"
 								className="form-control col-6"
 								value={orderDetailId}
+								min={1}
+								step={1}
 								onChange={onOrderDetailIdChangehandler}
 								// onBlur={onShowShippingStatus}
 							/>
