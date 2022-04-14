@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faUser, faClipboardUser } from '@fortawesome/free-solid-svg-icons'
-import { faKey, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faKey, faRightFromBracket, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { ImBooks } from 'react-icons/im';
 import logo from "../../userprofile.png";
 import messi from "../../messi.jpg";
@@ -304,7 +304,7 @@ const CustomerDashboardComponent = () => {
                         </div>
                         <div className="col-4">
                             <div className="p-3 border bg-light" onClick={addACardClick} style={{ textAlign: 'center' }}>
-                                Add a Card &nbsp; <FontAwesomeIcon icon={faUser} />
+                                Add a Card &nbsp; <FontAwesomeIcon icon={faCreditCard} />
                             </div>
                         </div>
                         {/* <div className="col-4">
