@@ -7,7 +7,6 @@ import {
 	faPersonWalkingDashedLineArrowRight,
 	faClockRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { ImBooks } from "react-icons/im";
 import logo from "../../userprofile.png";
 // import messi from "../../messi.jpg";
 
@@ -15,7 +14,7 @@ import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 
-import { Card, Col, Offcanvas, Row } from "react-bootstrap";
+import { Card, Offcanvas } from "react-bootstrap";
 import AdminService from "../../service/AdminService";
 import UserService from "../../service/UserService";
 import OrderDetailsService from "../../service/OrderDetailsService";
@@ -100,9 +99,15 @@ const CustomerDashboardComponent = () => {
 	}, []);
 
 	useEffect(() => {
+		// let totalSum = 0;
+		// totalOrderDetails.map((value, key) => {
+		// 	totalSum = totalSum + value.price * value.quantity;
+		// });
 		let totalSum = 0;
 		totalOrderDetails.map((value, key) => {
-			totalSum = totalSum + value.price * value.quantity;
+			totalSum =
+				totalSum +
+				(Math.ceil((parseFloat(value.price) - parseFloat(value.discountedPrice)) * 100) / 100) * value.quantity;
 		});
 		setTSum(totalSum);
 	});
@@ -149,8 +154,8 @@ const CustomerDashboardComponent = () => {
 				window.sessionStorage.removeItem("sessionObjectRole");
 				window.sessionStorage.removeItem("sessionObjectLastName");
 				window.sessionStorage.setItem("snackbar1", "show");
-                dispatch({ type: "USER", payload: false });
-                setLogout(true);
+				dispatch({ type: "USER", payload: false });
+				setLogout(true);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -168,7 +173,7 @@ const CustomerDashboardComponent = () => {
 		setDisplayConfirmationModal(false);
 	};
 
-    function MouseOver(event) {
+	function MouseOver(event) {
 		event.target.style.background = "linear-gradient(60deg, #e3ffe7 0%, #d9e7ff 100%)";
 		event.target.style.cursor = "pointer";
 	}
@@ -200,7 +205,7 @@ const CustomerDashboardComponent = () => {
 
 				<div className="row g-1 container" style={{ "margin-left": "16.5rem" }}>
 					<div style={{ "margin-left": "10rem" }} className="m-2 col-3">
-						<Card border="info" style={{ width: "18rem" }} className="border-2">
+						<Card border="danger" style={{ width: "18rem" }} className="border-2">
 							<Card.Body>
 								<Card.Title className="lead fs-4 text-center">Total Orders</Card.Title>
 								<Card.Text className="text-center fs-4 lead">
@@ -212,14 +217,10 @@ const CustomerDashboardComponent = () => {
 					</div>
 
 					<div style={{ "margin-left": "10rem" }} className="m-2 col-3">
-						<Card border="danger" style={{ width: "18rem" }} className="border-2">
+						<Card border="success" style={{ width: "18rem" }} className="border-2">
 							<Card.Body>
-								<Card.Title className="lead fs-4 text-center">Total Amount Spent</Card.Title>
-								<Card.Text className="text-center fs-4 lead">
-									{/* {allBooks.length} */}
-									{/* {totalOrderDetails.} */}
-									{Math.round(tSum)}
-								</Card.Text>
+								<Card.Title className="lead fs-4 text-center">Total Amount Saved</Card.Title>
+								<Card.Text className="text-center fs-4 lead">₹ {Math.round(tSum)}</Card.Text>
 							</Card.Body>
 						</Card>
 					</div>
@@ -306,7 +307,7 @@ const CustomerDashboardComponent = () => {
 							<div
 								className="p-3 border bg-light rounded text-danger"
 								onClick={() => showDeleteModal(userObject1)}
-                                style={{"cursor":"pointer"}}
+								style={{ cursor: "pointer" }}
 							>
 								Deregister Me &nbsp; <FontAwesomeIcon icon={faPersonWalkingDashedLineArrowRight} />
 							</div>

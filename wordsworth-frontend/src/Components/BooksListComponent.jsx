@@ -87,38 +87,39 @@ const BooksListComponent = () => {
 
 	return (
 		<div>
-			<Row className="g-4 m-2">
-				{
-					loading && displayBooks
-				}
-
-			</Row>
+			<Row className="g-4 m-2">{loading && displayBooks}</Row>
 			{/* Pagination buttons start */}
-			{
-				loading && <>
-
+			{loading && (
+				<>
 					<br />
 					<br />
 					<div className="row align-items-center">
 						<div className="col-4 d-flex justify-content-end">
-							<button type="button" class="btn btn-light btn-lg rounded-pill text-muted " onClick={prevPageClickhandler}>
+							<button
+								type="button"
+								class="btn btn-outline-light btn-lg rounded-circle border-3"
+								onClick={prevPageClickhandler}
+							>
 								<FontAwesomeIcon icon={faAnglesLeft} />
 							</button>
 						</div>
 						<div className="col-4 d-flex justify-content-center">
-							<h6 className="fs-2 text-light lead ">Page {pageNumber + 1} of {pageCount}</h6>
+							<h6 className="fs-2 text-light lead ">
+								Page {pageNumber + 1} of {pageCount}
+							</h6>
 						</div>
 						<div className="col-4 d-flex justify-content-start ">
-							<button type="button" class="btn btn-light btn-lg rounded-pill text-muted" onClick={nextPageClickhandler}>
+							<button
+								type="button"
+								class="btn btn-outline-light btn-lg rounded-circle border-3"
+								onClick={nextPageClickhandler}
+							>
 								<FontAwesomeIcon icon={faAnglesRight} />
 							</button>
 						</div>
 					</div>
-
-
-
 				</>
-			}
+			)}
 
 			{/* Pagination buttons end */}
 			<div className={show} id="snackbar">

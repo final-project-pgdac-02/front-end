@@ -41,7 +41,7 @@ const UpdateOrderDetailStatusComponent = () => {
 	// 	}
 	// };
 
-	const [showShipped, setShowShipped]=useState(false);
+	const [showShipped, setShowShipped] = useState(false);
 
 	const onShowShippingStatus = async () => {
 		try {
@@ -50,12 +50,10 @@ const UpdateOrderDetailStatusComponent = () => {
 			if (res.data === "PENDING" || res.data === "PROCESSED") {
 				setShippingStatus(res.data);
 				setShowForm(true);
-			}
-			else if(res.data==="SHIPPED"){
+			} else if (res.data === "SHIPPED") {
 				setShowShipped(true);
 				setShowForm(false);
-			}
-			else {
+			} else {
 				alert(res.data);
 				setShowForm(false);
 			}
@@ -115,12 +113,11 @@ const UpdateOrderDetailStatusComponent = () => {
 							className="btn btn-warning btn-lg m-3"
 						/>
 
-						{
-							showShipped &&
-							 <div className="card mx-auto shadow-sm fs-4 lead my-4 w-50">
-								 <strong>The item is already shipped!</strong>
-							 </div>
-						}
+						{showShipped && (
+							<div className="card mx-auto shadow-sm fs-4 lead my-4 w-50">
+								<strong>The item is already shipped!</strong>
+							</div>
+						)}
 						{/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> */}
 						<br />
 						{showForm && (
@@ -151,10 +148,8 @@ const UpdateOrderDetailStatusComponent = () => {
 									<option value="" defaultValue>
 										Select a Status
 									</option>
-									{
-										shippingStatus==="PENDING" &&	<option value="PROCESSED">PROCESSED</option>
-									}
-									
+									{shippingStatus === "PENDING" && <option value="PROCESSED">PROCESSED</option>}
+
 									<option value="SHIPPED">SHIPPED</option>
 								</select>
 								<br />

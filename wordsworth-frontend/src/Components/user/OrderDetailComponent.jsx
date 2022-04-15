@@ -34,8 +34,8 @@ const OrderDetailComponent = (props) => {
 						{props.item.orderId}
 					</div>
 				</div>
-				<div className='row'>
-					<div class="col-md-4">
+				<div className='row align-items-center'>
+					<div class="col-md-4 p-2">
 						<img
 							src={props.item.bookCover}
 							className="img-fluid"

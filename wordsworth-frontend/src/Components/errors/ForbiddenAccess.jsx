@@ -12,7 +12,7 @@ const ForbiddenAccess = () => {
 				<div className="row g-0 d-flex flex-wrap align-items-center">
 					<div className="card-body error-template">
 						<h1 className="card-title display-1 text-center m-1 ">
-							Oops
+							Oops{" "}
 							<span className="text-danger">
 								<FontAwesomeIcon icon={faHeartBroken} />
 							</span>

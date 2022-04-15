@@ -73,11 +73,11 @@ const Header = () => {
 	];
 
 	let navbarList2 = [
-		{ "to": "/addanaddress", "name": "Add An Address" },
-		{ "to": "/addacard", "name": "Add A Card" },
-		{ "to": "/changepassword", "name": "Change Password" },
-		{ "to": "#action/3.3", "name": "Upgrade Membership" },
-		{ "to": "/orderhistory", "name": "View Past Orders" }
+		{ to: "/addanaddress", name: "Add An Address" },
+		{ to: "/addacard", name: "Add A Card" },
+		{ to: "/changepassword", name: "Change Password" },
+		{ to: "/upgrademembership", name: "Upgrade Membership" },
+		{ to: "/orderhistory", name: "View Past Orders" },
 	];
 
 	let navbarList3 = [

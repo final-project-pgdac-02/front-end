@@ -131,7 +131,7 @@ const UpdateBookDetails = (props) => {
 				<div>
 					<br />
 					<br />
-					<div className="card mx-auto shadow" style={{ width: "55%" }} data-aos="flip-down">
+					<div className="card mx-auto shadow" style={{ width: "55%" }}>
 						<div className="row g-0 d-flex flex-wrap align-items-center">
 							<div className="card-body">
 								<h1 className="card-title display-4 text-center m-1 ">Update Book Details</h1>
