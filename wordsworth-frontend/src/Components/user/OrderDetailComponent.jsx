@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 
 const OrderDetailComponent = (props) => {
 
-    const navigate=useNavigate();
+	const navigate = useNavigate();
 
-    const amountSaved=Math.ceil((parseFloat(props.item.price)-parseFloat(props.item.discountedPrice))*100)/100;
+	const amountSaved = Math.ceil((parseFloat(props.item.price) - parseFloat(props.item.discountedPrice)) * 100) / 100;
 
-    const textClass=amountSaved>0?"text-success":"text-muted";
-    const paraClass=amountSaved>0?"card-text fw-bold fs-4":" card-text";
-    const bookLink=`/books/${props.item.bookId}`;
+	const textClass = amountSaved > 0 ? "text-success" : "text-muted";
+	const paraClass = amountSaved > 0 ? "card-text fw-bold fs-4" : " card-text";
+	const bookLink = `/books/${props.item.bookId}`;
 
-    return (
+	return (
 		<>
 			<div className="row g-0">
 				<div className="card-header d-flex justify-content-between border">
@@ -59,6 +59,13 @@ const OrderDetailComponent = (props) => {
 								<span>
 									<em>Shipping Status:</em> {props.item.shippingStatus}
 								</span>
+								{
+									props.item.shippingDate &&
+									<span>
+										<em>Shipping Date:</em> {props.item.shippingDate}
+									</span>
+
+								}
 								<span>
 									<em>Quantity:</em> {props.item.quantity}{" "}
 								</span>
