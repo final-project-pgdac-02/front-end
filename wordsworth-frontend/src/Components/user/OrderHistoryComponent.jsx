@@ -2,10 +2,7 @@ import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Col, ListGroup, Row, Tab } from 'react-bootstrap'
-import BookCardComponent from '../BookCardComponent'
 import EmptyOrderHistoryComponent from './EmptyOrderHistoryComponent'
-import InfoTextComponent from './InfoTextComponent'
 import OrderDetailComponent from './OrderDetailComponent'
 
 const OrderHistoryComponent = () => {
@@ -56,42 +53,48 @@ const OrderHistoryComponent = () => {
 
 
   return (
-    <div d-flex justify-content-center>
-      {
-        loading && orderHistory.length !== 0 &&
-        <>
-          <div className="card lead shadow tab mb-3 m-2 mt-5 p-2 mx-auto" style={{ maxWidth: '1200px', margin: '2em' }} >
-            {
-              displayOrders
-            }
-            
-          </div>
-          <br />
-            <br />
-            <div className="row align-items-center">
-              <div className="col-4 d-flex justify-content-end">
-                <button type="button" className="btn btn-light btn-lg rounded-pill " onClick={prevPageClickhandler}>
-                  <FontAwesomeIcon icon={faAnglesLeft} />
-                </button>
-              </div>
-              <div className="col-4 d-flex justify-content-center">
-                <h6 className="fs-2 text-light lead ">Page {pageNumber + 1} of {pageCount}</h6>
-              </div>
-              <div className="col-4 d-flex justify-content-start ">
-                <button type="button" className="btn btn-light btn-lg rounded-pill " onClick={nextPageClickhandler}>
-                  <FontAwesomeIcon icon={faAnglesRight} />
-                </button>
-              </div>
-            </div>
-        </>
-      }
+		<div d-flex justify-content-center>
+			{loading && orderHistory.length !== 0 && (
+				<>
+					<div
+						className="card lead shadow tab mb-3 m-2 mt-5 p-2 mx-auto"
+						style={{ maxWidth: "1200px", margin: "2em" }}
+					>
+						{displayOrders}
+					</div>
+					<br />
+					<br />
+					<div className="row align-items-center">
+						<div className="col-4 d-flex justify-content-end">
+							<button
+								type="button"
+								className="btn btn-outline-light btn-lg rounded-circle border-3"
+								onClick={prevPageClickhandler}
+							>
+								<FontAwesomeIcon icon={faAnglesLeft} />
+							</button>
+						</div>
+						<div className="col-4 d-flex justify-content-center">
+							<h6 className="fs-2 text-light lead ">
+								Page {pageNumber + 1} of {pageCount}
+							</h6>
+						</div>
+						<div className="col-4 d-flex justify-content-start ">
+							<button
+								type="button"
+								className="btn btn-outline-light btn-lg rounded-circle border-3"
+								onClick={nextPageClickhandler}
+							>
+								<FontAwesomeIcon icon={faAnglesRight} />
+							</button>
+						</div>
+					</div>
+				</>
+			)}
 
-      {
-        loading && orderHistory.length === 0 && <EmptyOrderHistoryComponent />
-      }
-    </div>
-
-  )
+			{loading && orderHistory.length === 0 && <EmptyOrderHistoryComponent />}
+		</div>
+  );
 }
 
 export default OrderHistoryComponent

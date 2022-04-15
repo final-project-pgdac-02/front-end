@@ -76,7 +76,7 @@ const ViewAllBooks = () => {
 												UpdateStock(value.id);
 											}}
 										>
-											Update Stock
+											Increment Stock
 										</button>				
 										<button
 											type="button"

@@ -85,7 +85,7 @@ const UpdateBookStockComponent = (props) => {
 					<div className="card mx-auto shadow" style={{ width: "55%" }}>
 						<div className="row g-0 d-flex flex-wrap align-items-center">
 							<div className="card-body">
-								<h1 className="card-title display-4 text-center m-1 ">Update Book Stock</h1>
+								<h1 className="card-title display-4 text-center m-1 ">Increment Book Stock</h1>
 								<hr />
 							</div>
 							<form onSubmit={OnUpdateStockClick}>
@@ -114,7 +114,6 @@ const UpdateBookStockComponent = (props) => {
 										type="number"
 										className="form-control"
 										id="stock"
-										placeholder="Update Book Stock"
 										min={1}
 										onChange={stockTextHandler}
 										value={stock}
