@@ -42,6 +42,15 @@ const BooksListComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [bookList, setBookList] = useState([]);
 
+	const [pageNumber, setPageNumber] = useState(0);
+
+	const booksPerPage = 6;
+
+	const pagesVisited = pageNumber * booksPerPage;
+
+
+
+
 	const getBookList = async () => {
 		try {
 			const res = await axios.get("http://localhost:8080");
@@ -52,42 +61,65 @@ const BooksListComponent = () => {
 		}
 	};
 
+	const displayBooks = bookList.slice(pagesVisited, pagesVisited + booksPerPage).map((book, i) => {
+		return (
+			<Col key={i}>
+				<BookCardComponent key={i} book={book} />
+			</Col>
+		)
+	})
+
+	const pageCount = Math.ceil(bookList.length / booksPerPage);
+
+	const nextPageClickhandler = () => {
+		if (pageNumber < pageCount - 1) {
+			setPageNumber(pageNumber + 1);
+			window.scroll(0, 0);
+		}
+	}
+
+	const prevPageClickhandler = () => {
+		if (pageNumber > 0) {
+			setPageNumber(pageNumber - 1);
+			window.scroll(0, 0);
+		}
+	}
+
 	return (
 		<div>
 			<Row className="g-4 m-2">
-				{loading &&
-					bookList.map((book, i) => (
-						<Col key={i}>
-							<BookCardComponent key={i} book={book} />
-							{/* {book.bookTitle} */}
-						</Col>
-					))}
+				{
+					loading && displayBooks
+				}
 
-				{/* {Array.from({ length: 8 }).map((_, idx) => (
-					<Col>
-						<BookCardComponent />
-					</Col>
-				))} */}
 			</Row>
 			{/* Pagination buttons start */}
-			<br />
-			<br />
-            <br/>
-			<div className="row align-items-center">
-				<div className="col-4 d-flex justify-content-end">
-					<button type="button" class="btn btn-light btn-lg rounded-pill text-muted ">
-						<FontAwesomeIcon icon={faAnglesLeft} />
-					</button>
-				</div>
-				<div className="col-4 d-flex justify-content-center">
-					<h6 className="fs-2 text-light lead ">Page 1 of 10</h6>
-				</div>
-				<div className="col-4 d-flex justify-content-start ">
-					<button type="button" class="btn btn-light btn-lg rounded-pill text-muted">
-						<FontAwesomeIcon icon={faAnglesRight} />
-					</button>
-				</div>
-			</div>
+			{
+				loading && <>
+
+					<br />
+					<br />
+					<div className="row align-items-center">
+						<div className="col-4 d-flex justify-content-end">
+							<button type="button" class="btn btn-light btn-lg rounded-pill text-muted " onClick={prevPageClickhandler}>
+								<FontAwesomeIcon icon={faAnglesLeft} />
+							</button>
+						</div>
+						<div className="col-4 d-flex justify-content-center">
+							<h6 className="fs-2 text-light lead ">Page {pageNumber + 1} of {pageCount}</h6>
+						</div>
+						<div className="col-4 d-flex justify-content-start ">
+							<button type="button" class="btn btn-light btn-lg rounded-pill text-muted" onClick={nextPageClickhandler}>
+								<FontAwesomeIcon icon={faAnglesRight} />
+							</button>
+						</div>
+					</div>
+
+
+
+				</>
+			}
+
 			{/* Pagination buttons end */}
 			<div className={show} id="snackbar">
 				Login Successful
