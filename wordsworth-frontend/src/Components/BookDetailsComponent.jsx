@@ -163,6 +163,25 @@ const BookDetailsComponent = (props) => {
 									</h3>
 								</div>
 							</Col>
+							{props.book.stock <= 10 ? ( props.book.stock ===0 ? <Col>
+									<div className="text-center text-danger display-5 p-4 small">
+										<h3>
+											<small>
+												<strong>Out of Stock!</strong>
+											</small>
+										</h3>
+									</div>
+								</Col>:
+								<Col>
+									<div className="text-center text-danger display-5 p-4 small">
+										<h3>
+											<small>
+												<strong>Only {props.book.stock} left in stock!</strong>
+											</small>
+										</h3>
+									</div>
+								</Col>
+							) : null}
 						</Row>
 						<Row>
 							<Col>

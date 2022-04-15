@@ -31,6 +31,7 @@ const BookCardComponent = (props) => {
 						}}
 						// src="https://neelkanthpublishers.com/assets/bookcover.png"
                         className="p-2"
+                        style={{height:"27rem"}}
 					/>
 				</NavLink>
 				{/* </a> */}

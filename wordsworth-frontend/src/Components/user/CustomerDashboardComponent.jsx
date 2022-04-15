@@ -1,22 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faUser, faClipboardUser, faCreditCard } from '@fortawesome/free-solid-svg-icons'
-import { faKey, faRightFromBracket, faPersonWalkingDashedLineArrowRight, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
-import { ImBooks } from 'react-icons/im';
+import { faBook, faUser, faClipboardUser, faCreditCard } from "@fortawesome/free-solid-svg-icons";
+import {
+	faKey,
+	faRightFromBracket,
+	faPersonWalkingDashedLineArrowRight,
+	faClockRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { ImBooks } from "react-icons/im";
 import logo from "../../userprofile.png";
 // import messi from "../../messi.jpg";
 
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { UserContext } from '../../App';
+import { UserContext } from "../../App";
 
-import { Card, Col, Offcanvas, Row } from 'react-bootstrap';
-import AdminService from '../../service/AdminService';
-import UserService from '../../service/UserService';
-import OrderDetailsService from '../../service/OrderDetailsService';
-import DeleteConfirmation from '../admin/DeleteConfirmation';
-
-
+import { Card, Col, Offcanvas, Row } from "react-bootstrap";
+import AdminService from "../../service/AdminService";
+import UserService from "../../service/UserService";
+import OrderDetailsService from "../../service/OrderDetailsService";
+import DeleteConfirmation from "../admin/DeleteConfirmation";
 
 const CustomerDashboardComponent = () => {
 	const userObject1 = window.sessionStorage.getItem("sessionObjectId");
@@ -36,9 +39,8 @@ const CustomerDashboardComponent = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-
 	const [tSum, setTSum] = useState("");
-	const [userId,setUserId] = useState("");
+	const [userId, setUserId] = useState("");
 
 	const [loggedInAsCustomer, setLoggedInAsCustomer] = useState(false);
 	const [loginFalse, setLoginFalse] = useState(false);
@@ -63,7 +65,6 @@ const CustomerDashboardComponent = () => {
 		}
 	}, []);
 
-
 	useEffect(() => {
 		// window.scrollTo(0, 0);
 
@@ -73,38 +74,38 @@ const CustomerDashboardComponent = () => {
 			setTimeout(function () {
 				setShow1("");
 				clearTimeout();
-
-			}, 3000)
+			}, 3000);
 			window.sessionStorage.removeItem("snackbar");
 		}
-	})
+	});
 
 	const [orderListOfUser, setOrderListOfUser] = useState([]);
 	const [totalOrderDetails, setTotalOrderDetails] = useState([]);
 	useEffect(() => {
-		UserService.getAllOrdersById(userObject1).then((response) => {
-			setOrderListOfUser(response.data);
+		UserService.getAllOrdersById(userObject1)
+			.then((response) => {
+				setOrderListOfUser(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 
-		}).catch((error) => {
-			console.log(error);
-		});
-
-		OrderDetailsService.getAllOrderDetailsByOrderId(userObject1).then((response) => {
-			setTotalOrderDetails(response.data);
-		}).catch(error => {
-			console.log(error);
-		});
-
+		OrderDetailsService.getAllOrderDetailsByOrderId(userObject1)
+			.then((response) => {
+				setTotalOrderDetails(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}, []);
 
 	useEffect(() => {
 		let totalSum = 0;
 		totalOrderDetails.map((value, key) => {
-			totalSum = totalSum + (value.price * value.quantity)
-		})
+			totalSum = totalSum + value.price * value.quantity;
+		});
 		setTSum(totalSum);
 	});
-
 
 	const LogoutClick = (event) => {
 		event.preventDefault();
@@ -127,39 +128,53 @@ const CustomerDashboardComponent = () => {
 	const addAnAddressClick = (event) => {
 		event.preventDefault();
 		setAddAddress(true);
-	}
+	};
 
 	const addACardClick = (event) => {
 		event.preventDefault();
 		setAddCard(true);
-	}
+	};
 
 	const onUpdateUserProfileClick = (event) => {
 		event.preventDefault();
 		navigate("/updateProfile/" + userObject1);
-	}
+	};
 
 	const onDeleteAUserClick = (id) => {
-
-		AdminService.deleteAUser(id).then((response) => {
-			LogoutClick();
-		}).catch((error) => {
-			console.log(error);
-		})
+		AdminService.deleteAUser(id)
+			.then((response) => {
+				window.sessionStorage.removeItem("sessionObjectId");
+				window.sessionStorage.removeItem("sessionObjectFirstName");
+				window.sessionStorage.removeItem("sessionObjectEmail");
+				window.sessionStorage.removeItem("sessionObjectRole");
+				window.sessionStorage.removeItem("sessionObjectLastName");
+				window.sessionStorage.setItem("snackbar1", "show");
+                dispatch({ type: "USER", payload: false });
+                setLogout(true);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 		setDisplayConfirmationModal(false);
 		navigate("/login");
-	}
+	};
 	const showDeleteModal = (uId) => {
-
 		setUserId(userObject1);
 
 		setDisplayConfirmationModal(true);
-	}
+	};
 
 	const hideConfirmationModal = () => {
 		setDisplayConfirmationModal(false);
 	};
 
+    function MouseOver(event) {
+		event.target.style.background = "linear-gradient(60deg, #e3ffe7 0%, #d9e7ff 100%)";
+		event.target.style.cursor = "pointer";
+	}
+	function MouseOut(event) {
+		event.target.style.background = "";
+	}
 
 	return (
 		<>
@@ -211,22 +226,24 @@ const CustomerDashboardComponent = () => {
 				</div>
 
 				<br></br>
-				<div className="container fs-5 text-muted">
+				<div className="container fs-5 text-muted text-center">
 					<div className="row g-4 m-3">
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={addAnAddressClick}
-								style={{ textAlign: "center", cursor: "pointer"  }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Add an Address &nbsp; <FontAwesomeIcon icon={faBook} />
 							</div>
 						</div>
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={updatePasswordClick}
-								style={{ textAlign: "center", cursor: "pointer"  }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Change Password &nbsp; <FontAwesomeIcon icon={faKey} />
 							</div>
@@ -235,7 +252,8 @@ const CustomerDashboardComponent = () => {
 							<div
 								className="p-3 border bg-light rounded"
 								onClick={addACardClick}
-								style={{ textAlign: "center", cursor: "pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Add a Card &nbsp; <FontAwesomeIcon icon={faCreditCard} />
 							</div>
@@ -244,9 +262,9 @@ const CustomerDashboardComponent = () => {
 						<div className="col-4">
 							<div
 								className="p-3 border bg-light text-center rounded"
-								onClick={()=>navigate("/upgrademembership")}
-								style={{ textAlign: "center", cursor: "pointer" }}
-
+								onClick={() => navigate("/upgrademembership")}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Upgrade Membership &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
 							</div>
@@ -255,7 +273,8 @@ const CustomerDashboardComponent = () => {
 							<div
 								className="p-3 border bg-light rounded"
 								onClick={handleShow}
-								style={{ textAlign: "center", cursor: "pointer"  }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								View Profile &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
@@ -264,29 +283,30 @@ const CustomerDashboardComponent = () => {
 							<div
 								className="p-3 border bg-light rounded"
 								onClick={LogoutClick}
-								style={{ textAlign: "center", cursor: "pointer"  }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Logout &nbsp; <FontAwesomeIcon icon={faRightFromBracket} />
 							</div>
 						</div>
 
-
 						<div className="col-4" style={{ "margin-left": "33.35%" }}>
 							<div
 								className="p-3 border bg-light rounded"
 								onClick={() => navigate("/orderhistory")}
-								style={{ textAlign: "center", cursor: "pointer"  }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								View Past Orders &nbsp; <FontAwesomeIcon icon={faClockRotateLeft} />
 							</div>
 							<br />
 						</div>
 
-						<div className="col-4" style={{ "margin-left": "33.35%" }}>
+						<div className="col-4 mx-auto">
 							<div
 								className="p-3 border bg-light rounded text-danger"
 								onClick={() => showDeleteModal(userObject1)}
-								style={{ textAlign: "center", cursor: "pointer"  }}
+                                style={{"cursor":"pointer"}}
 							>
 								Deregister Me &nbsp; <FontAwesomeIcon icon={faPersonWalkingDashedLineArrowRight} />
 							</div>
@@ -294,7 +314,12 @@ const CustomerDashboardComponent = () => {
 						</div>
 					</div>
 				</div>
-				<DeleteConfirmation showModal={displayConfirmationModal} confirmModal={onDeleteAUserClick} hideModal={hideConfirmationModal} UID={userId} />
+				<DeleteConfirmation
+					showModal={displayConfirmationModal}
+					confirmModal={onDeleteAUserClick}
+					hideModal={hideConfirmationModal}
+					UID={userId}
+				/>
 			</div>
 
 			<div className={show1} id="snackbar">
@@ -335,11 +360,6 @@ const CustomerDashboardComponent = () => {
 			</div>
 		</>
 	);
-}
-
-
-
-
-
+};
 
 export default CustomerDashboardComponent;
