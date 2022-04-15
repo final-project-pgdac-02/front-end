@@ -1,19 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faUser, faClipboardUser } from '@fortawesome/free-solid-svg-icons'
-import { faKey, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { ImBooks } from 'react-icons/im';
+import { faBook, faUser, faClipboardUser } from "@fortawesome/free-solid-svg-icons";
+import { faKey, faRightFromBracket, faTruckFast, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { ImBooks } from "react-icons/im";
 import logo from "../../userprofile.png";
 // import messi from "../../messi.jpg";
 
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { UserContext } from '../../App';
+import { UserContext } from "../../App";
 
-import { Card, Col, Offcanvas, Row } from 'react-bootstrap';
-import AdminService from '../../service/AdminService';
-
-
+import { Card, Col, Offcanvas, Row } from "react-bootstrap";
+import AdminService from "../../service/AdminService";
 
 const AdminDashboardComponent = () => {
 	const userObject1 = window.sessionStorage.getItem("sessionObjectId");
@@ -35,7 +33,7 @@ const AdminDashboardComponent = () => {
 	const [allUsers, setAllUsers] = useState([]);
 	const [allBooks, setAllBooks] = useState([]);
 
-	const [loggedInAsAdmin,setLoggedInAsAdmin] = useState(false);
+	const [loggedInAsAdmin, setLoggedInAsAdmin] = useState(false);
 	const [loginFalse, setLoginFalse] = useState(false);
 	const [updatePassword, setUpdatePassword] = useState(false);
 	const [logout, setLogout] = useState(false);
@@ -49,44 +47,43 @@ const AdminDashboardComponent = () => {
 	});
 
 	useEffect(() => {
-		if(userObject4 === "ADMIN"){
+		if (userObject4 === "ADMIN") {
 			setLoggedInAsAdmin(true);
 			navigate("/admindashboard");
-		}else {
+		} else {
 			navigate("/");
 		}
-	},[]);
-
+	}, []);
 
 	useEffect(() => {
-
 		if (snackBar === "show") {
 			console.log(snackBar);
 			setShow1(snackBar);
 			setTimeout(function () {
 				setShow1("");
 				clearTimeout();
-
-			}, 3000)
+			}, 3000);
 			window.sessionStorage.removeItem("snackbar");
 		}
-	})
+	});
 
 	useEffect(() => {
+		AdminService.getAllUserList()
+			.then((response) => {
+				setAllUsers(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 
-		AdminService.getAllUserList().then((response) => {
-			setAllUsers(response.data);
-		}).catch((error) => {
-			console.log(error);
-		})
-
-		AdminService.viewBookDetails().then((response) => {
-			setAllBooks(response.data);
-		}).catch((error) => {
-			console.log(error);
-		})
-	},[])
-
+		AdminService.viewBookDetails()
+			.then((response) => {
+				setAllBooks(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 
 	const LogoutClick = (event) => {
 		event.preventDefault();
@@ -109,26 +106,33 @@ const AdminDashboardComponent = () => {
 	const addABookClick = (event) => {
 		event.preventDefault();
 		setAddBook(true);
-	}
+	};
 
 	const onViewAllUsersClick = (event) => {
 		event.preventDefault();
 		navigate("/viewAllUsers");
-	}
+	};
 
 	const onUpdateUserProfileClick = (event) => {
 		event.preventDefault();
 		navigate("/updateProfile/" + userObject1);
-	}
+	};
 
 	const onViewAllBooksClick = (event) => {
 		event.preventDefault();
 		navigate("/bookList");
-	}
+	};
 
 	const UpgradeMembershipClick = (event) => {
 		event.preventDefault();
 		navigate("/membership");
+	};
+	function MouseOver(event) {
+		event.target.style.background = "linear-gradient(60deg, #e3ffe7 0%, #d9e7ff 100%)";
+        event.target.style.cursor="pointer"
+	}
+	function MouseOut(event) {
+		event.target.style.background = "";
 	}
 
 	return (
@@ -175,72 +179,80 @@ const AdminDashboardComponent = () => {
 					<div className="row g-4 m-3">
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={addABookClick}
-								style={{ textAlign: "center", cursor:"pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Add an Book &nbsp; <FontAwesomeIcon icon={faBook} />
 							</div>
 						</div>
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={updatePasswordClick}
-								style={{ textAlign: "center", cursor:"pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Change Password &nbsp; <FontAwesomeIcon icon={faKey} />
 							</div>
 						</div>
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={onViewAllUsersClick}
-								style={{ textAlign: "center", cursor:"pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
-								View All Users &nbsp; <FontAwesomeIcon icon={faUser} />
+								View All Users &nbsp; <FontAwesomeIcon icon={faUsers} />
 							</div>
 						</div>
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={onViewAllBooksClick}
-								style={{ textAlign: "center", cursor:"pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								View All Books &nbsp; <ImBooks />
 							</div>
 						</div>
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={UpgradeMembershipClick}
-								style={{ textAlign: "center", cursor:"pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Manage Memberships &nbsp; <FontAwesomeIcon icon={faClipboardUser} />
 							</div>
 						</div>
 						<div className="col-4">
 							<div
-								className="p-3 border bg-light rounded"
-								onClick={()=>navigate("/updateshippingstatus")}
-								style={{ textAlign: "center" , cursor:"pointer"}}
+								className="p-3 border bg-light rounded text-center"
+								onClick={() => navigate("/updateshippingstatus")}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
-								Update Shipping Status &nbsp; <FontAwesomeIcon icon={faUser} />
+								Update Shipping Status &nbsp; <FontAwesomeIcon icon={faTruckFast} />
 							</div>
 						</div>
 						<div className="col-4 mx-auto">
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={handleShow}
-								style={{ textAlign: "center", cursor:"pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								View Profile &nbsp; <FontAwesomeIcon icon={faUser} />
 							</div>
 						</div>
 						<div className="col-4" style={{ "margin-left": "33.35%" }}>
 							<div
-								className="p-3 border bg-light rounded"
+								className="p-3 border bg-light rounded text-center"
 								onClick={LogoutClick}
-								style={{ textAlign: "center", cursor:"pointer" }}
+								onMouseEnter={MouseOver}
+								onMouseLeave={MouseOut}
 							>
 								Logout &nbsp; <FontAwesomeIcon icon={faRightFromBracket} />
 							</div>
@@ -249,7 +261,6 @@ const AdminDashboardComponent = () => {
 					</div>
 				</div>
 			</div>
-
 			<div className={show1} id="snackbar">
 				Login Successful
 			</div>
@@ -259,30 +270,24 @@ const AdminDashboardComponent = () => {
 						<Offcanvas.Title></Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body>
-						<div className="card" style={{ width: "22rem" }}>
-							<img src={logo} className="card-img-top" alt="..." />
+						<div className="card mx-auto" style={{ width: "22rem" }}>
+							{/* <img src={logo} className="card-img-top" alt="..." /> */}
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
-									<h5>
-										<strong>NAME : </strong>
+									<h5 className="fw-light fs-4">
+										Name : &nbsp;
 										{userObject2}&nbsp;{userObject5}
 									</h5>
 								</li>
 								<li className="list-group-item">
-									<h5>
-										<strong>E-MAIL : </strong>
-										{userObject3}
-									</h5>
+									<h5 className="fw-light fs-4">E-Mail : &nbsp;{userObject3}</h5>
 								</li>
 								<li className="list-group-item">
-									<h5>
-										<strong>ROLE : </strong>
-										{userObject4}
-									</h5>
+									<h5 className="fw-light fs-4">Role : {userObject4}</h5>
 								</li>
 								<li className="list-group-item" style={{ textAlign: "center" }}>
 									<button
-										className="btn btn-primary"
+										className="btn btn-primary m-2 fs-5"
 										type="button"
 										onClick={onUpdateUserProfileClick}
 									>
@@ -296,6 +301,6 @@ const AdminDashboardComponent = () => {
 			</div>
 		</>
 	);
-}
+};
 
 export default AdminDashboardComponent;

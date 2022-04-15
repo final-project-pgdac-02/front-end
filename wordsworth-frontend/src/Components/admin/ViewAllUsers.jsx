@@ -80,18 +80,30 @@ const ViewAllUsers = () => {
 		<>
 			{loggedInAdminOrNot && <Navigate to="/forbidden" />}
 			<div className="card" style={{ margin: 70 }}>
-				<table className="table align-middle mb-0 bg-white table-striped">
+				<table className="table align-middle mb-0 bg-white table-striped table-hover text-center">
 					<thead className="thead-dark">
 						<tr>
-							<th scope="col">ID</th>
-							<th scope="col">NAME</th>
-							<th scope="col">EMAIL</th>
-							<th scope="col">PHONE</th>
-							<th scope="col">ROLE</th>
-							<th scope="col">ACTION</th>
+							<th scope="col" className="lead fs-3">
+								ID
+							</th>
+							<th scope="col" className="lead fs-3">
+								Name
+							</th>
+							<th scope="col" className="lead fs-3">
+								Email
+							</th>
+							<th scope="col" className="lead fs-3">
+								Phone No.
+							</th>
+							<th scope="col" className="lead fs-3">
+								Role
+							</th>
+							<th scope="col" className="lead fs-3">
+								Action
+							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="fs-5 lead">
 						{userList.map((value, key) => {
 							return (
 								<tr>
