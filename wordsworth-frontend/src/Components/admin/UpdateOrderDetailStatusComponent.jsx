@@ -17,6 +17,8 @@ const UpdateOrderDetailStatusComponent = () => {
 
 	const [newStatus, setNewStatus] = useState("");
 
+	// const status=["PROCESSED","SHIPPED"];
+
 	const [shippingStatus, setShippingStatus] = useState("");
 	const onOrderDetailIdChangehandler = (event) => {
 		setOrderDetailId(event.target.value);
@@ -24,13 +26,36 @@ const UpdateOrderDetailStatusComponent = () => {
 		console.log(event.target.value);
 	};
 
+	// const onShowShippingStatus = async () => {
+	// 	try {
+	// 		const res = await axios.get(`http://localhost:8080/orderdetails/shippingstatus/${orderDetailId}`);
+	// 		if (res.data === "PENDING" || res.data === "PROCESSED" || res.data === "SHIPPED") {
+	// 			setShippingStatus(res.data);
+	// 			setShowForm(true);
+	// 		} else {
+	// 			alert(res.data);
+	// 			setShowForm(false);
+	// 		}
+	// 	} catch (err) {
+	// 		alert(err);
+	// 	}
+	// };
+
+	const [showShipped, setShowShipped]=useState(false);
+
 	const onShowShippingStatus = async () => {
 		try {
+			setShowShipped(false);
 			const res = await axios.get(`http://localhost:8080/orderdetails/shippingstatus/${orderDetailId}`);
-			if (res.data === "PENDING" || res.data === "PROCESSED" || res.data === "SHIPPED") {
+			if (res.data === "PENDING" || res.data === "PROCESSED") {
 				setShippingStatus(res.data);
 				setShowForm(true);
-			} else {
+			}
+			else if(res.data==="SHIPPED"){
+				setShowShipped(true);
+				setShowForm(false);
+			}
+			else {
 				alert(res.data);
 				setShowForm(false);
 			}
@@ -89,6 +114,13 @@ const UpdateOrderDetailStatusComponent = () => {
 							onClick={onShowShippingStatus}
 							className="btn btn-warning btn-lg m-3"
 						/>
+
+						{
+							showShipped &&
+							 <div className="card mx-auto shadow-sm fs-4 lead my-4 w-50">
+								 <strong>The item is already shipped!</strong>
+							 </div>
+						}
 						{/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> */}
 						<br />
 						{showForm && (
@@ -119,8 +151,10 @@ const UpdateOrderDetailStatusComponent = () => {
 									<option value="" defaultValue>
 										Select a Status
 									</option>
-									<option value="PENDING">PENDING</option>
-									<option value="PROCESSED">PROCESSED</option>
+									{
+										shippingStatus==="PENDING" &&	<option value="PROCESSED">PROCESSED</option>
+									}
+									
 									<option value="SHIPPED">SHIPPED</option>
 								</select>
 								<br />
