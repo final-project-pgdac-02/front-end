@@ -30,55 +30,71 @@ const ViewAllBooks = () => {
     }
 
     return (
-        <>
-            <div className="card" style={{ "margin": 50, "marginLeft" :150, "marginRight": 150 }}>
-                <table className="table align-middle mb-0 bg-white table-striped">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookList.map((value, key) => {
-
-                            return (
-                                <tr>
-                                    <td>
-                                        {key + 1}
-                                    </td>
-                                    <td>
-                                        {value.bookTitle}
-                                    </td>
-                                    <td>
-                                        {value.author}
-                                    </td>
-                                    <td>
-                                        {value.category}
-                                    </td>
-                                    <td>
-                                        {value.stock}
-                                    </td>
-                                    <td>
-                                        {value.price}
-                                    </td>
-                                    <td>
-                                        <button type="button" className="btn btn-success mx-2" onClick={() => { UpdateStock(value.id) }}>Update Stock</button>
-                                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" className="btn btn-danger" onClick={() => { UpdateBook(value.id) }} >Update Details</button>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </div>
-        </>
-    );
+		<>
+			<div className="card" style={{ margin: 50, marginLeft: 150, marginRight: 150 }}>
+				<table className="table align-middle mb-0 bg-white table-striped table-hover text-center">
+					<thead className="thead-dark">
+						<tr>
+							<th scope="col" className="lead fs-3">
+								ID
+							</th>
+							<th scope="col" className="lead fs-3">
+								Name
+							</th>
+							<th scope="col" className="lead fs-3">
+								Author
+							</th>
+							<th scope="col" className="lead fs-3">
+								Category
+							</th>
+							<th scope="col" className="lead fs-3">
+								Stock
+							</th>
+							<th scope="col" className="lead fs-3">
+								Price
+							</th>
+							<th scope="col" className="lead fs-3">
+								Actions
+							</th>
+						</tr>
+					</thead>
+					<tbody className="fs-5 lead">
+						{bookList.map((value, key) => {
+							return (
+								<tr>
+									<td>{value.id}</td>
+									<td>{value.bookTitle}</td>
+									<td>{value.author}</td>
+									<td>{value.category}</td>
+									<td>{value.stock}</td>
+									<td>{value.price}</td>
+									<td className="d-flex justify-content-evenly">
+										<button
+											type="button"
+											className="btn btn-success mx-2"
+											onClick={() => {
+												UpdateStock(value.id);
+											}}
+										>
+											Update Stock
+										</button>				
+										<button
+											type="button"
+											className="btn btn-danger"
+											onClick={() => {
+												UpdateBook(value.id);
+											}}
+										>
+											Update Details
+										</button>
+									</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
+		</>
+	);
 }
 export default ViewAllBooks;
