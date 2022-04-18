@@ -2,12 +2,20 @@ import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import EmptyOrderHistoryComponent from './EmptyOrderHistoryComponent'
 import OrderDetailComponent from './OrderDetailComponent'
 
 const OrderHistoryComponent = () => {
 
+
+	const navigate=useNavigate();
+
   useEffect(() => {
+	  if(!userId){
+		  alert("You need to login first");
+		  navigate("/")
+	  }
     getOrderHistory();
   }, []);
 
