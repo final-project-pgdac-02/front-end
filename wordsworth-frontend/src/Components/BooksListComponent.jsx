@@ -44,7 +44,7 @@ const BooksListComponent = () => {
 
 	const [pageNumber, setPageNumber] = useState(0);
 
-	const booksPerPage = 6;
+	const booksPerPage = 7;
 
 	const pagesVisited = pageNumber * booksPerPage;
 
@@ -69,7 +69,7 @@ const BooksListComponent = () => {
 		)
 	})
 
-	const pageCount = Math.ceil(bookList.length / booksPerPage);
+	const pageCount = Math.ceil(bookList.length / booksPerPage); //4
 
 	const nextPageClickhandler = () => {
 		if (pageNumber < pageCount - 1) {

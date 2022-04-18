@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddressListComponent from "./AddressListComponent";
 import CardListComponent from "./CardListComponent";
@@ -8,6 +8,12 @@ const OrderFormComponent = () => {
 
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		if(!userId){
+			alert("You need to login first");
+			navigate("/")
+		}
+	}, []);
 
 	const [selectedAddressId, setSelectedAddressId]=useState("");
 	const [selectedCardId, setSelectedCardId] = useState("");
